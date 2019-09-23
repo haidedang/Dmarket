@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Web3 from 'web3'
 import router from './router'
+import store from "@/store/store";
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -15,6 +16,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

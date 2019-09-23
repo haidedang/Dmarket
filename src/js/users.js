@@ -10,16 +10,15 @@ const Users = {
   account: null,
 
   init: function () {
-    let self = this
-
+    
     return new Promise(function (resolve, reject) {
-      self.contract = contract(UsersContract)
-      self.contract.setProvider(window.web3.currentProvider)
+      Users.contract = contract(UsersContract)
+      Users.contract.setProvider(window.web3.currentProvider)
 
       ethereum.enable()
         .then(function (accounts) {
           console.log(accounts)
-          self.account = accounts[0]
+          Users.account = accounts[0]
           // You now have an array of accounts!
           // Currently only ever one:
           // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
@@ -31,11 +30,11 @@ const Users = {
 
       /*   window.web3.eth.accounts().then((accounts) => {
           console.log(accounts)
-          self.account = accounts[0]
+          Users.account = accounts[0]
         }) */
 
-      self.contract.deployed().then(instance => {
-        self.instance = instance
+      Users.contract.deployed().then(instance => {
+        Users.instance = instance
         resolve()
       }).catch(err => {
         reject(err)
@@ -44,13 +43,12 @@ const Users = {
   },
 
   exists: function (address) {
-    let self = this
-
+    
     return new Promise((resolve, reject) => {
 
-      self.instance.exists.call(
-        address || self.account,
-        { from: self.account }
+      Users.instance.exists.call(
+        address || Users.account,
+        { from: Users.account }
       ).then(exists => {
         resolve(exists)
       }).catch(err => {
@@ -60,11 +58,10 @@ const Users = {
   },
 
   authenticate: function () {
-    let self = this
-
+    
     return new Promise((resolve, reject) => {
-      self.instance.authenticate.call(
-        { from: self.account }
+      Users.instance.authenticate.call(
+        { from: Users.account }
       ).then(pseudo => {
         resolve(web3.toUtf8(pseudo))
       }).catch(err => {
@@ -74,12 +71,11 @@ const Users = {
   },
 
   create: function (pseudo) {
-    let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.create(
+      Users.instance.create(
         pseudo,
-        { from: self.account.toLowerCase() }
+        { from: Users.account.toLowerCase() }
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -89,11 +85,10 @@ const Users = {
   },
 
   destroy: function () {
-    let self = this
-
+    
     return new Promise((resolve, reject) => {
-      self.instance.destroy(
-        { from: self.account }
+      Users.instance.destroy(
+        { from: Users.account }
       ).then(tx => {
         resolve(tx)
       }).catch(err => {

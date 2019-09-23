@@ -3,10 +3,11 @@ import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Signup from '@/components/Signup'
 import Register from '@/components/Register'
+import NewOrganization from '@/components/NewOrganization'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -22,6 +23,13 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/newOrganization',
+      name: 'newOrganisation',
+      component: NewOrganization
     }
   ]
 })
+
+export default router

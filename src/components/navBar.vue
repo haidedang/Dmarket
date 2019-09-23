@@ -12,32 +12,30 @@
 
         <!-- Right aligned nav items -->
 
-        <b-navbar-nav v-if="isloggedIn" class="ml-auto">
+        <b-navbar-nav v-if="$store.state.user.isLoggedIn" class="ml-auto">
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form>
 
-          <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
+          <b-nav-item-dropdown text="+" right>
+            <b-dropdown-item href="#">New API</b-dropdown-item>
+            <b-dropdown-item href="#">New App</b-dropdown-item>
+            <b-dropdown-item ><router-link id="newOrganization" to="/newOrganization">New Organization</router-link> </b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown v-if="onOff" right>
+          <b-nav-item-dropdown text="User" v-if="$store.state.user.isLoggedIn" right>
             <!-- Using 'button-content' slot -->
-            <template v-slot:button-content>
+           <!--  <template v-slot:button-content>
               <em>User</em>
-            </template>
+            </template> -->
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="signout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
         <b-navbar-nav v-else class="ml-auto">
-          <b-nav-item href="#">Login</b-nav-item>
-
+          <b-nav-item @click="login">Login</b-nav-item>
           <b-nav-item>
             <router-link class="link" to="/register">Register</router-link>
           </b-nav-item>
@@ -48,13 +46,26 @@
 </template>
 
 <script>
+import store from "@/store/store";
+import { mapState } from "vuex";
+import userService from "@/services/userService"
+
 export default {
   name: "navBar",
   data() {
     return {
-      msg: "it works",
-      isloggedIn: false
+      msg: "it works"
     };
+  },
+  methods: {
+    signout: async function() {
+      await userService.signOut();
+      this.$router.push('/')
+    },
+    login: async function() {
+      await userService.fetchUser(); 
+      this.$router.push('/')
+    }
   }
 };
 </script>
@@ -63,6 +74,11 @@ export default {
 /* TODO: make this global style for links  */
 .link {
   color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+#newOrganization {
+  color: black;
   text-decoration: none;
 }
 </style>

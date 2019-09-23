@@ -2,6 +2,11 @@ pragma solidity ^0.4.15;
 
 contract Users {
 
+  struct Users(
+    address owner
+    bytes32 IFPSHash
+  )
+
   mapping(address => bytes32) public users;
 
   event UserCreated(address indexed _address, bytes32 _pseudo);
