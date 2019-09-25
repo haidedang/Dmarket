@@ -29,9 +29,6 @@ export default {
       show: true
     };
   },
-  beforeCreate: function () {
-      Users.init()
-    },
   methods: {
     async onSubmit(evt) {
       evt.preventDefault();

@@ -84,6 +84,20 @@ const Users = {
     })
   },
 
+  createOrganization: function (pseudo) {
+
+    return new Promise((resolve, reject) => {
+      Users.instance.createOrganization(
+        pseudo, 
+        {from: Users.account.toLowerCase()}
+      ).then(tx => {
+        resolve(tx)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
   destroy: function () {
     
     return new Promise((resolve, reject) => {

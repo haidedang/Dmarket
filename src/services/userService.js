@@ -28,5 +28,15 @@ export default {
     },
     async signOut() {
         await store.dispatch('resetState');
-      }
+      },
+    async createOrganization(organizationName) {
+        // fetch user Object from IFPS  
+        // append Organization IFPS Hash to the User Object 
+        // upload new object to IFPS 
+        // upload User profile on Blockchain 
+        // create Organization Object from IFPS 
+        await Users.init();
+        await Users.createOrganization(organizationName);
+        store.dispatch('getOrganization', Users)
+    }
 }

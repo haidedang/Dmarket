@@ -10,7 +10,10 @@ export const getProfile = async ({ commit }, users) => {
         } else {
             console.log('please sign up')
         }
-        
+}
+
+export const getOrganization = async ({ commit}, users) => {
+        let userName = await users.authenticate()
 }
 
 export const resetState = ({commit}) => {

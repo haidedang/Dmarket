@@ -18,6 +18,7 @@
 
 <script>
 import Users from '@/js/users'
+import userService from '@/services/userService'
 
 export default {
   name: "newOrganization",
@@ -33,17 +34,12 @@ export default {
       Users.init()
     },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      let self = this
-        if (typeof this.form.name !== 'undefined' && this.form.name !== '') {
-          Users.create(this.form.name).then(tx => {
-            self.$router.push('/')
-          // this.$router.push({name: "dashboard"})
-          }).catch(err => {
-            console.log(err)
-          })
-        }
+    async onSubmit(evt) {
+     evt.preventDefault();
+      if (typeof this.form.name !== 'undefined' && this.form.name !== '') {
+           await userService.createOrganization(this.form.name);
+            this.$router.push('/');
+      }
     },
     onReset(evt) {
       evt.preventDefault();
