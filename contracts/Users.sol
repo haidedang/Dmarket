@@ -6,25 +6,25 @@ contract Users {
     bytes32 name;
     address owner;
     bytes32 IFPSHash;
+    address[] memberIndex;
+    mapping(address => Member) members;
   }
 
-  struct Organization {
-    bytes32 name;
-    address owner;
-    bytes32 IFPSHash;
-  }
-
-  struct Api {
-    address owner;
-    bytes32 IFPSHash;
+  struct Member {
+    uint index;
+    string owner;
   }
 
   mapping(address => bytes32) public users;
-  mapping(address => Organization) public organizations;
 
   event UserCreated(address indexed _address, bytes32 _pseudo);
   event UserDestroyed(address indexed _address);
-  
+
+  /* function addMember(address userAddress, address memberAddress, string role) public returns (uint index){
+    users[userAddress].members[memberAddress].owner = role;
+    users[userAddress].memberIndex.push(memberAddress);
+    return users[userAddress].memberIndex.length -1; 
+  } */
 
   function exists (address _address) public constant returns (bool _exists) {
     return (users[_address] != bytes32(0));
@@ -40,7 +40,7 @@ contract Users {
     UserCreated(msg.sender, _pseudo);
   }
 
-  function createOrganization(bytes32 _pseudo) public {
+ /*  function createOrganization(bytes32 _pseudo) public {
     organizations[msg.sender].name = _pseudo;
     organizations[msg.sender].owner = msg.sender; 
   }
@@ -49,7 +49,7 @@ contract Users {
     require(organizations[_address].owner == msg.sender); 
     return (organizations[_address].name); 
   }
-
+ */
   function destroy () public {
     require(exists(msg.sender));
     delete users[msg.sender];

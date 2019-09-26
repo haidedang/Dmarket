@@ -37,7 +37,7 @@ export default {
     async onSubmit(evt) {
      evt.preventDefault();
       if (typeof this.form.name !== 'undefined' && this.form.name !== '') {
-           await userService.createOrganization(this.form.name);
+           await userService.createOrganization('asdasd',this.form.name);
             this.$router.push('/');
       }
     },

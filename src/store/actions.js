@@ -1,5 +1,4 @@
 
-
 export const getProfile = async ({ commit }, users) => {
     console.log('entered action')
         let userName = await users.authenticate(); 

@@ -29,7 +29,7 @@
     methods: {
       signup: function () {
         let self = this
-        console.log(this.form.pseud)
+        console.log(this.form.pseudo)
         if (typeof this.form.pseudo !== 'undefined' && this.form.pseudo !== '') {
           Users.create(this.form.pseudo).then(tx => {
             console.log(tx)

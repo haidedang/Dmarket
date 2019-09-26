@@ -1,19 +1,19 @@
-import Users from "@/js/users";
+import App from "@/js/users";
 import store from "@/store/store";
 
 export default {
 
     async createUser(username) {
-         await Users.init();
-         await Users.create(username); 
-         store.dispatch('getProfile', Users)
+         await App.init();
+         await App.create(username); 
+         store.dispatch('getProfile', App)
     },
     async fetchUser() {
-        await Users.init()
-        let exists = await Users.exists(Users.account)
+        await App.init()
+        let exists = await App.exists(App.account)
         try {
             if (exists) {
-                store.dispatch('getProfile', Users);
+                store.dispatch('getProfile', App);
             } else {
                 store.dispatch('resetState');
             }
@@ -22,21 +22,21 @@ export default {
         }
     },
     async destroyUser() {
-       await Users.init();
-       await Users.destroy();
+       await App.init();
+       await App.destroy();
        await this.signOut();
     },
     async signOut() {
         await store.dispatch('resetState');
       },
-    async createOrganization(organizationName) {
+    async createOrganization(address, name) {
         // fetch user Object from IFPS  
         // append Organization IFPS Hash to the User Object 
         // upload new object to IFPS 
         // upload User profile on Blockchain 
         // create Organization Object from IFPS 
-        await Users.init();
-        await Users.createOrganization(organizationName);
-        store.dispatch('getOrganization', Users)
+        await App.init();
+        await App.createOrganization(address, name);
+        store.dispatch('getOrganization', App)
     }
 }
