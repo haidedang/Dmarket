@@ -2,26 +2,7 @@ import Users from "@/js/users";
 import Organizations from "@/js/organizations"
 import MarketplaceRegistry from "@/js/marketplaceRegistry"
 import store from "@/store/store";
-
-import Web3 from 'web3';
-
-if (window.ethereum) {
-  window.web3 = new Web3(ethereum);
-  try {
-    // Request account access if needed
-    ethereum.enable();
-  } catch (error) {
-    // User denied account access...
-  }
-} else if (window.web3) { // Legacy dapp browsers...
-  window.web3 = new Web3(web3.currentProvider);
-} else { // Non-dapp browsers...
-  console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-}
-console.log(web3);
-
-
-
+import EthereumClient from "../js/EthereumClient"
  /**
   * 
   * @param {*} param0 
@@ -106,8 +87,10 @@ const actions = {
         }
     },
     async signMessage ({commit}) {
-        console.log('hey');
-        console.log(web3.eth.accounts.sign('hey', "0x8A87DDC9D4F26D495636BD8C8E0B325D6E81095F8E97CFD09C646890D1D4E6FF".toLowerCase()))
+        EthereumClient.getInstance().then(client => {
+            client.signMessage()
+        })
+        
     },
     
     /* async createOrganizationUpdate({commit}, payload) {
