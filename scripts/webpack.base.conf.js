@@ -9,7 +9,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: ['babel-polyfill', './src/main.js']
   },
   output: {
     path: config.build.assetsRoot,
@@ -24,7 +24,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       '@config' : resolve('config'),
-      '@contracts' : resolve('build/contracts')
+      '@contracts' : resolve('build/contracts'),
+      '@modules' : resolve('node_modules')
     }
   },
   module: {
@@ -48,7 +49,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'),resolve('build/contracts')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

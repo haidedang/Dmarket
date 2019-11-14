@@ -46,9 +46,7 @@
 </template>
 
 <script>
-import store from "@/store/store";
 import { mapState } from "vuex";
-import userService from "@/services/userService"
 
 export default {
   name: "navBar",
@@ -59,11 +57,11 @@ export default {
   },
   methods: {
     signout: async function() {
-      await userService.signOut();
+      await this.$store.dispatch('resetState');
       this.$router.push('/')
     },
     login: async function() {
-      await userService.fetchUser(); 
+      await this.$store.dispatch('fetchUser');
       this.$router.push('/')
     }
   }

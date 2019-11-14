@@ -1,8 +1,8 @@
 import contract from 'truffle-contract'
 import UsersContract from '@contracts/Users.json'
-import OrganizationContract from '@contracts/Organizations.json'
 
-const App = {
+
+const User = {
 
   contract: {},
 
@@ -13,16 +13,13 @@ const App = {
   init: function () {
 
     return new Promise(function (resolve, reject) {
-      App.contract.User = contract(UsersContract)
-      App.contract.User.setProvider(window.web3.currentProvider)
-
-      App.contract.Organization = contract(OrganizationContract)
-      App.contract.Organization.setProvider(window.web3.currentProvider)
+      User.contract = contract(UsersContract)
+      User.contract.setProvider(window.web3.currentProvider)
 
       ethereum.enable()
         .then(function (accounts) {
           console.log(accounts)
-          App.account = accounts[0]
+          User.account = accounts[0]
           // You now have an array of accounts!
           // Currently only ever one:
           // ['0xFDEa65C8e26263F6d9A1B5de9555D2931A33b825']
@@ -34,46 +31,33 @@ const App = {
 
       /*   window.web3.eth.accounts().then((accounts) => {
           console.log(accounts)
-          App.account = accounts[0]
+          User.account = accounts[0]
         }) */
 
-      App.contract.User.deployed().then(instance => {
+      User.contract.deployed().then(instance => {
         console.log('User deployed')
-        App.contract.User.instance = instance
-      }).catch(err => {
-        reject(err)
-      })
-
-      App.contract.Organization.deployed().then(instance => {
-        console.log('Organization deployed')
-        App.contract.Organization.instance = instance
+        User.instance = instance
         resolve()
       }).catch(err => {
         reject(err)
       })
-    })
-  },
-  createOrganization: function (address, name) {
 
-    return new Promise((resolve, reject) => {
-      App.contract.Organization.instance
-      .createOrganization(App.account.toLowerCase(), web3.fromAscii(name), { from: App.account.toLowerCase() })
-      .then(tx => {
-        resolve(tx)
+      /* User.contract.Organization.deployed().then(instance => {
+        console.log('Organization deployed')
+        User.instance = instance
+        resolve()
       }).catch(err => {
         reject(err)
-      })
+      }) */
     })
   },
-
-
   exists: function (address) {
 
     return new Promise((resolve, reject) => {
 
-      App.contract.User.instance.exists.call(
-        address || App.account,
-        { from: App.account }
+      User.instance.exists.call(
+        address || User.account,
+        { from: User.account }
       ).then(exists => {
         resolve(exists)
       }).catch(err => {
@@ -85,8 +69,8 @@ const App = {
   authenticate: function () {
 
     return new Promise((resolve, reject) => {
-      App.contract.User.instance.authenticate.call(
-        { from: App.account }
+      User.instance.authenticate.call(
+        { from: User.account }
       ).then(pseudo => {
         resolve(web3.toUtf8(pseudo))
       }).catch(err => {
@@ -98,9 +82,9 @@ const App = {
   create: function (pseudo) {
 
     return new Promise((resolve, reject) => {
-      App.contract.User.instance.create(
+      User.instance.create(
         pseudo,
-        { from: App.account.toLowerCase() }
+        { from: User.account.toLowerCase() }
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -112,8 +96,8 @@ const App = {
   destroy: function () {
 
     return new Promise((resolve, reject) => {
-      App.contract.User.instance.destroy(
-        { from: App.account }
+      User.instance.destroy(
+        { from: User.account }
       ).then(tx => {
         resolve(tx)
       }).catch(err => {
@@ -123,4 +107,4 @@ const App = {
   }
 }
 
-export default App
+export default User

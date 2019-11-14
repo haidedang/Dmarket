@@ -2,24 +2,25 @@
   <div class="dashboard">
     <h1>{{ msg }}</h1>
     <div v-if="$store.state.user.isLoggedIn">
-      Welcome {{ $store.state.user.name}}. Destroy your account by clicking
+      Welcome {{$store.state.user.name}}. Destroy your account by clicking
       <a
         href="#"
         @click="destroyAccount"
       >here</a>.
+      <div>
+        <h2>Organizations</h2>
+      </div>
     </div>
     <div v-else>
       Sign up
-      <router-link to="/signup">here</router-link>.
+      <router-link to="/register">here</router-link>.
     </div>
   </div>
 </template>
 
 <script>
 /* import Users from "@/js/users"; */
-import store from "@/store/store";
 import { mapState } from "vuex";
-import userService from "@/services/userService";
 
 export default {
   name: "dashboard",
@@ -29,6 +30,7 @@ export default {
     };
   },
   beforeCreate: async function() {
+    this.$store.dispatch('getOrganization');
     // fetch UserProfile 
     // fetch Organizations 
     // fetch Apis 
@@ -39,9 +41,9 @@ export default {
     this.$router.push('/');
   }, */
   methods: {
-    destroyAccount: function(e) {
+    destroyAccount: async function(e) {
       e.preventDefault();
-      userService.destroyUser();
+      await this.$store.dispatch('destroyUser');
       this.$router.push('/');
     }
   }

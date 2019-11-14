@@ -16,10 +16,12 @@
 </template>
 
 <script>
-import Users from '@/js/users'
-import userService from '@/services/userService'
+
+import userService from '@/services/userService';
 
 export default {
+ 
+
   name: "register",
   data() {
     return {
@@ -33,11 +35,13 @@ export default {
     async onSubmit(evt) {
       evt.preventDefault();
       if (typeof this.form.name !== 'undefined' && this.form.name !== '') {
-           await userService.createUser(this.form.name);
-            this.$router.push('/');
+           await this.$store.dispatch('createUser', this.form.name);
+           this.$router.push('/');
       }
     },
-    onReset(evt) {
+    async onReset(evt) {
+      await this.$store.dispatch('signMessage'); 
+
       evt.preventDefault();
       this.form.name = "";
     }
