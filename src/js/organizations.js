@@ -1,4 +1,4 @@
-import contract from 'truffle-contract'
+/* import contract from 'truffle-contract'
 import OrganizationContract from '@contracts/Organizations.json'
 
 const Organization = {
@@ -71,4 +71,4 @@ const Organization = {
   }
   
   export default Organization
-  
+   */

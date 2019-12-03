@@ -1,6 +1,6 @@
 import Users from "@/js/users";
-import Organizations from "@/js/organizations"
-import MarketplaceRegistry from "@/js/marketplaceRegistry"
+/* import Organizations from "@/js/organizations"
+import MarketplaceRegistry from "@/js/marketplaceRegistry" */
 import store from "@/store/store";
 import EthereumClient from "../js/EthereumClient"
  /**
@@ -89,9 +89,14 @@ const actions = {
     async signMessage ({commit}) {
         EthereumClient.getInstance().then(client => {
             client.signMessage()
-        })
-        
+        })  
     },
+
+    async verifyApp({commit}) {
+        EthereumClient.getInstance().then(client => {
+            client.verifyApp();
+        }) 
+    }
     
     /* async createOrganizationUpdate({commit}, payload) {
         await MarketplaceRegistry.init(); 

@@ -1,12 +1,14 @@
-var Users = artifacts.require("./Users.sol");
-var Organizations = artifacts.require("./Organizations.sol")
-var EthereumDIDRegistry = artifacts.require("./EthereumDIDRegistry.sol")
+var EthereumDIDRegistry = artifacts.require("./ERC1056.sol")
+var ClaimRegistry = artifacts.require("./ERC780.sol")
+var MarketPlaceCore = artifacts.require("./MarketPlaceCore.sol")
 
 module.exports = function(deployer) {
-  deployer.deploy(Users)
+  let market
+  deployer.deploy(EthereumDIDRegistry)
     .then(() => {
-       return deployer.deploy(Organizations);
-    }).then(() => {
-       return deployer.deploy(EthereumDIDRegistry)
-    });
+      return deployer.deploy(ClaimRegistry)  
+    })
+    .then(() => {
+      return deployer.deploy(MarketPlaceCore, EthereumDIDRegistry.address, ClaimRegistry.address);
+    })
 };

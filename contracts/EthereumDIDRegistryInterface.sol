@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.12;
 
 interface EthereumDIDRegistryInterface {
     
@@ -32,5 +32,6 @@ interface EthereumDIDRegistryInterface {
     function revokeDelegate(address identity, bytes32 delegateType, address delegate) external;
     function setAttribute(address identity, bytes32 name, bytes calldata value, uint validity) external;
     function revokeAttribute(address identity, bytes32 name, bytes calldata value) external;
+
 }
 

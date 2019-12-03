@@ -40,7 +40,7 @@ export default {
       }
     },
     async onReset(evt) {
-      await this.$store.dispatch('signMessage'); 
+      await this.$store.dispatch('verifyApp'); 
 
       evt.preventDefault();
       this.form.name = "";
