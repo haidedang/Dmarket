@@ -3,25 +3,20 @@ const  EIP712Domain = require('eth-typed-data').default;
 const SimpleSigner = require('did-jwt').SimpleSigner;
 const utils = require('ethereumjs-util');
 
-const abi = require('ethereumjs-abi')
+const abi = require('ethereumjs-abi');
 var sha3 = require("js-sha3").keccak_256;
 var BN = require("bn.js");
 
-
 const ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
-
-const EthrDID = require('ethr-did')
 
 const resolve = require('did-resolver')
 const registerEthrDidToResolver = require('ethr-did-resolver').default;
 
 var Web3 = require('web3')
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
-let web3 = new Web3(provider);
+let web3 = new Web3(provider); 
 
-let config = {}; 
-config.registryAddress = "0x8f308D0A904aFa19167baAe61058BDFE69F711ad".toLowerCase(); 
-
+// Fixed Ganache Accounts, these will stay static. Account [0]
 const privateKey = Buffer.from("569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a", "hex")
 const address = '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2';
 
@@ -34,7 +29,7 @@ function getBlock(blockNumber) {
     });
   }
 
-  function getLogs(filter) {
+function getLogs(filter) {
     return new Promise((resolve, reject) => {
       filter.get((error, events) => {
         if (error) return reject(error);
@@ -43,23 +38,18 @@ function getBlock(blockNumber) {
     });
   }
 
-  function stripHexPrefix(str) {
+function stripHexPrefix(str) {
     if (str.startsWith("0x")) {
       return str.slice(2);
     }
     return str;
   }
 
-  function bytes32ToString(bytes) {
+function bytes32ToString(bytes) {
     return Buffer.from(bytes.slice(2).split("00")[0], "hex").toString();
   }
 
-/*   function stringToBytes32(str) {
-    const buffstr = Buffer.from(str).toString("hex");
-    return buffstr + "0".repeat(64 - buffstr.length);
-  }
-   */
-  function stringToBytes32 (str) {
+function stringToBytes32 (str) {
     const buffstr =
       '0x' +
       Buffer.from(str)
@@ -68,7 +58,7 @@ function getBlock(blockNumber) {
     return buffstr + '0'.repeat(66 - buffstr.length)
   }
 
-  function attributeToHex (key, value) {
+function attributeToHex (key, value) {
     if (Buffer.isBuffer(value)) {
       return `0x${value.toString('hex')}`
     }
@@ -86,7 +76,7 @@ function getBlock(blockNumber) {
     return `0x${Buffer.from(value).toString('hex')}`
   }
 
-  function leftPad(data, size = 64) {
+function leftPad(data, size = 64) {
     if (data.length === size) return data;
     return "0".repeat(size - data.length) + data;
   }
@@ -129,6 +119,7 @@ contract('MarketCore', function (accounts) {
         
         before(async() => {
             marketCore = await MarketCore.deployed();
+            // Get ERC1056 address 
             registry = await marketCore.registry();
         });
 
@@ -163,13 +154,12 @@ contract('MarketCore', function (accounts) {
 
             client.app = app; 
 
-            let tx;
-            let sigObj
+            let sigObj;
             let appAccount; 
 
             before(async () => {
             appAccount = web3.eth.accounts.create(); 
-            console.log('appAccount',appAccount)
+
             sigObj = await signData(
                 appAccount.address,
                 appAccount.address,
@@ -180,14 +170,13 @@ contract('MarketCore', function (accounts) {
                 Buffer.from("changeOwner").toString("hex") +
                 stripHexPrefix(registry)
             );
-            console.log('sigObj',sigObj)
+    
             });
 
             it("should create Ethereum Account for app", async () => {
-                console.log('xD', appAccount.address, sigObj)
                 let value = await marketCore.registerEntity(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, registry,
                 { from: account })
-                  
+                
                   console.log(value)
                 // const sig = utils.ecsign(app.signHash(), appAccount.privateKey);
             })
@@ -302,15 +291,12 @@ contract('MarketCore', function (accounts) {
     })
 
     describe("delete App", () => {
-
     })
 
     describe("rate App", () => {
-
     })
 
     describe("register AppVersion()", () => {
-
     })
 
 
