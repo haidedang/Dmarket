@@ -5,7 +5,7 @@ import "./EthereumDIDRegistryInterface.sol";
 
 contract ERC1056 is EthereumDIDRegistryInterface{
 
-  mapping(address => address) owners; 
+  mapping(address => address) public owners; 
   mapping(address => mapping(bytes32 => mapping(address => uint))) public delegates;
   mapping(address => uint) public changed;
   mapping(address => uint) public nonce;
@@ -47,8 +47,8 @@ contract ERC1056 is EthereumDIDRegistryInterface{
   }
 
   function checkSignature(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash) internal returns(address) {
-    bytes32 FixedHash = prefixed(hash);
-    address signer = ecrecover(FixedHash, sigV, sigR, sigS);
+   /*  bytes32 FixedHash = prefixed(hash); */
+    address signer = ecrecover(hash, sigV, sigR, sigS);
     require(signer == identityOwner(identity));
     nonce[signer]++;  
     return signer;
@@ -132,8 +132,8 @@ contract ERC1056 is EthereumDIDRegistryInterface{
     revokeAttribute(identity, checkSignature(identity, sigV, sigR, sigS, hash), name, value);
   }
 
- function prefixed(bytes32 hash) internal returns (bytes32) {
+/*  function prefixed(bytes32 hash) internal returns (bytes32) {
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hash));
-    }
+    } */
 }
 
