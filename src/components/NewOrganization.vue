@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import Users from '@/js/users'
-import userService from '@/services/userService'
 
 export default {
   name: "newOrganization",

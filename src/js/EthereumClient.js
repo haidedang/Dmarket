@@ -1,5 +1,16 @@
 import getWeb3 from '../util/getWeb3'
 
+import EthrDID from 'ethr-did'
+
+const abi = require('ethereumjs-abi')
+
+/* const HttpProvider = require('ethjs-provider-http')
+let provider = new HttpProvider('http://localhost:8545') */
+import { resolve } from 'did-resolver'
+import registerEthrDidToResolver from 'ethr-did-resolver'
+//const resolve = require('did-resolver')
+//const registerEthrDidToResolver = require('ethr-did-resolver').default;
+
 const contract = require('truffle-contract')
 const MarketCore = require('../../build/contracts/MarketPlaceCore.json')
 const  EIP712Domain = require('eth-typed-data').default;
@@ -48,6 +59,7 @@ class EthereumClient {
     static async build() {
         let web3 = await getWeb3
         console.log(web3.currentProvider)
+        console.log(web3.version)
         let marketCoreContract = contract(MarketCore)
         marketCoreContract.setProvider(web3.currentProvider)
         let marketCore = await marketCoreContract.deployed()
@@ -57,8 +69,9 @@ class EthereumClient {
     }
 
     async signMessage() {
+        console.log(this.web3.version)
         console.log('hey');
-        console.log(this.web3.eth.accounts.sign('hey', "0x8A87DDC9D4F26D495636BD8C8E0B325D6E81095F8E97CFD09C646890D1D4E6FF".toLowerCase()))
+        //console.log(this.web3.eth.accounts.sign('hey', "0x8A87DDC9D4F26D495636BD8C8E0B325D6E81095F8E97CFD09C646890D1D4E6FF".toLowerCase()))
     }
 
     async getUserAccount() {
@@ -78,8 +91,40 @@ class EthereumClient {
         }
     }
 
+    async signPayment(recipient, callback) {
+      var hash = "0x" + abi.soliditySHA3(
+        ["uint8","uint8","address","address"],
+        [0x19,0,"0x8c1ed7e19abaa9f23c476da86dc1577f1ef401f5", recipient]
+      ).toString("hex");
+  
+      console.log(typeof(hash))
+      console.log(hash.length)
+  
+      let prefix = "\x19Ethereum Signed Message:\n"
+      //this is how the hashing of sign works. 
+      let msgHash1 = web3.utils.sha3(prefix+hash)
+      console.log(msgHash1.length)
+  
+      
+       //*/
+      let hashedmessage = web3.eth.accounts.hashMessage(hash);
+  
+      let sigObj = await web3.eth.accounts.sign(hash, "0xa0bd243444a526200ef5cf743dea1065f7de709685e6a05b50ad934addfa3c8f")
+      console.log(sigObj)
+     // console.log("result",hashedmessage)
+      //console.log(hashedmessage.length)
+      //console.log(sigObj.messageHash)
+      //let privateKey = "0xa0bd243444a526200ef5cf743dea1065f7de709685e6a05b50ad934addfa3c8f"
+  
+      //web3.eth.personal.sign(hash, "0x1f2f7bb9d6c12955988c10db46d30cfdae43df21", callback).then(console.log);
+     // let sigObj = await web3.eth.personal.sign(hash, privateKey)
+      //let msgHash2 = sigObj.messageHash;
+      // console.log(msgHash2)
+      //web3.personal.sign(hash, web3.eth.defaultAccount, callback);
+    }
+
     //-----EXPERIMENTAL---------
-     verifyApp() {
+     verifyApp1() {
         let app 
         let appData; 
         let signer ;
@@ -127,6 +172,32 @@ class EthereumClient {
 
             // Post it on the Blockchain. 
         })
+    }
+
+    verifyApp2(){
+      // Create a new Ethereum DID conform account on specified network 
+      // Account 1 - Ganache 
+      const keypair = {
+        address: '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2',
+        privateKey: '569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a' 
+      };
+
+      const registryAddress='0x57605772a7736C66063126573d996596fbE04110';
+
+      const ethrDid = new EthrDID({address : keypair.address, provider:this.web3.currentProvider, registry:registryAddress});
+
+      ethrDid.setAttribute('did/svc/HubService', 'https://hubs.uport.me', 10000)
+      .then(res => console.log('Ethr DID\n\n', res))
+      .catch(e => console.log(e))
+        
+      let did = 'did:ethr:' + keypair.address; 
+      console.log(this.web3.currentProvider)
+      registerEthrDidToResolver({provider: this.web3.currentProvider, registry:registryAddress})
+      resolve(did).then(doc => console.log(doc)).catch(e => console.log(e))
+    }
+
+    verifyApp(){
+      this.signPayment();
     }
 
 }

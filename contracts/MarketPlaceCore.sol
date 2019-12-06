@@ -9,8 +9,4 @@ constructor(address _ethereumDIDRegistry, address _claimRegistry) public {
         registry = EthereumDIDRegistryInterface(_ethereumDIDRegistry); 
         claimRegistry = ClaimRegistryInterface(_claimRegistry);
   }
-
-
-
-
 }

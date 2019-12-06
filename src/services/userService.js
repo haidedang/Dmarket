@@ -1,7 +1,6 @@
-import Users from "@/js/users";
+
 import Organizations from "@/js/organizations"
 import store from "@/store/store";
-import MarketplaceRegistry from "@/js/marketplaceRegistry"
 import Organization from "../js/organizations";
 
 

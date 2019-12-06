@@ -7,7 +7,7 @@ import "./ClaimRegistryInterface.sol";
 
 contract MarketPlaceBase is Verifier{
 
-    EthereumDIDRegistryInterface registry;
+    EthereumDIDRegistryInterface public registry;
     ClaimRegistryInterface claimRegistry; 
 
   string public constant TYPE_APP ="app";
@@ -20,12 +20,16 @@ contract MarketPlaceBase is Verifier{
   bytes32 public constant DELEGATE_MEMBER = keccak256(bytes("member"));
 
 
+  function registerEntity(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner) public {
+      registry.changeOwnerSigned(identity, sigV, sigR, sigS, newOwner); 
+  }
+
   // Ownership is handled in ERC1056
   // Marketplace Logic in here. 
   
+  // registers Entity to ERC780 
   function _updateEntity(address identity, address actor,bytes32 key, bytes32 signature) public {
-
-      require(  actor == registry.identityOwner(identity) || 
+      require( actor == registry.identityOwner(identity) || 
                 registry.validDelegate(registry.identityOwner(identity), DELEGATE_ADMIN, actor) ||
                 registry.validDelegate(identity, DELEGATE_ADMIN, actor)
               );
@@ -33,6 +37,16 @@ contract MarketPlaceBase is Verifier{
       // set the Hash, /app/version 
       claimRegistry.setClaim(identity, key , signature);  
   }
+
+  // registers Entity to ERC1056 
+/*   function _updateEntityERC1056() public {
+      require( actor == registry.identityOwner(identity) || 
+                registry.validDelegate(registry.identityOwner(identity), DELEGATE_ADMIN, actor) ||
+                registry.validDelegate(identity, DELEGATE_ADMIN, actor)
+              );
+  } */
+
+
 
   function Test(address identity, bytes32 key) public view returns (bytes32) {
     return claimRegistry.getClaim(address(this), identity, key); 
