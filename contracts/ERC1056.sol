@@ -5,7 +5,7 @@ import "./EthereumDIDRegistryInterface.sol";
 
 contract ERC1056 is EthereumDIDRegistryInterface{
 
-  mapping(address => address) public owners; 
+  mapping(address => address) public  ; 
   mapping(address => mapping(bytes32 => mapping(address => uint))) public delegates;
   mapping(address => uint) public changed;
   mapping(address => uint) public nonce;
