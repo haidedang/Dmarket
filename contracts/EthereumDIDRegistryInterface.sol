@@ -31,6 +31,7 @@ interface EthereumDIDRegistryInterface {
     function addDelegate(address identity, bytes32 delegateType, address delegate, uint validity) external;
     function revokeDelegate(address identity, bytes32 delegateType, address delegate) external;
     function setAttribute(address identity, bytes32 name, bytes calldata value, uint validity) external;
+    function setAttributeSigned(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 name, bytes calldata value, uint validity) external;
     function revokeAttribute(address identity, bytes32 name, bytes calldata value) external;
 
 }

@@ -19,9 +19,21 @@ contract MarketPlaceBase is Verifier{
   bytes32 public constant DELEGATE_ADMIN = keccak256(bytes("admin"));
   bytes32 public constant DELEGATE_MEMBER = keccak256(bytes("member"));
 
+  // This holds all organization, app and api IDs registered in the marketplace 
+  address[] entity; 
 
-  function registerEntity(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner) public {
-      registry.changeOwnerSigned(identity, sigV, sigR, sigS, newOwner); 
+  // This maps the owner of entity to the respective entity. because ownership is transferred to the marketplace, the owner needs to be specified here. The ownership is being transferred, so delegates and other dudes can write to the DECENTRALIZED RESSOURCE RECORDS, or the ERC 1056 data storage. 
+  mapping(uint256 => address) EntityIndexToOwner; 
+  mapping(address => uint) entityOwner; 
+
+  function changeOwnerSigned(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner ) public{
+    registry.changeOwnerSigned(identity, sigV, sigR, sigS, newOwner);
+  }
+
+  function registerEntity(address identity, bytes32 name, bytes memory value, uint validity) public {
+      registry.setAttribute(identity, name, value, validity);
+      // entity.push(identity); 
+      // EntityIndexToOwner[entity.length -1] = msg.sender; 
   }
 
   // Ownership is handled in ERC1056

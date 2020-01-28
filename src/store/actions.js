@@ -94,7 +94,7 @@ const actions = {
 
     async verifyApp({commit}) {
         EthereumClient.getInstance().then(client => {
-            client.verifyApp();
+            client.verifyApp1();
         }) 
     }
     

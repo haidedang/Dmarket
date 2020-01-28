@@ -24,7 +24,7 @@ config.registryAddress = "0x1C56346CD2A2Bf3202F771f50d3D14a367B48070";
 const myDomain = new EIP712Domain({
     name: "Marketplace Registry",               // Name of the domain
     version: "1",                     // Version identifier for this domain
-    chainId: 1574864255528,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
+    chainId: 1579946562578,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
     verifyingContract: config.registryAddress,  // Address of smart contract associated with this domain
     salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"          // Random string to differentiate domain, just in case
   })

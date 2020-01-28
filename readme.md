@@ -57,14 +57,13 @@ truffle develop
 Deploy smart contracts on local blockchain
 
 ```
-cd ethereum
 truffle migrate
 ```
 
 Run application in browser
 
 ```
-npm run dev
+npm run start
 ```
 
 ## Running the tests

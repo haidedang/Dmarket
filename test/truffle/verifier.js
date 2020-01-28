@@ -112,6 +112,92 @@ contract('MarketCore', function (accounts) {
           v: signature.v
         };
       }
+
+    // [TICKET] #26 
+    describe("createEntity", () => { 
+      before(async() => {
+        marketCore = await MarketCore.deployed();
+        // Get ERC1056 address 
+        registry = await marketCore.registry();
+       });
+
+     /*  const myDomain = new EIP712Domain({
+        name: "Marketplace Registry",               // Name of the domain
+        version: "1",                     // Version identifier for this domain
+        chainId: 1574864255528,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
+        verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070',  // Address of smart contract associated with this domain
+        salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558" 
+      })
+
+      const App = myDomain.createType('App', [
+        {name: 'name', type: 'string'},
+        {name: 'description', type: 'string'},
+        {name: 'image', type: 'string'},
+      ])
+
+      const Api = myDomain.createType('Api', [
+        {name: 'name', type: 'string'},
+        {name: 'description', type: 'string'}, 
+        {name: 'documentation', type: 'string'}
+      ])
+
+      const AppVersion = myDomain.createType('AppVersion', [
+        {name: 'name', type: 'string'},
+        {name: 'releaseNotes', type: 'string'},
+        {name: 'version', type: 'string'},
+        {name: 'downloadUrl', type:'string'},
+      ])
+
+      const ApiVersion = myDomain.createType('ApiVersion', [
+        {name: 'name', type: 'string'},
+        {name: 'description', type: 'string'}, 
+        {name: 'documentation', type: 'string'},
+        {name: 'version', type: 'version'}
+      ]) */
+
+      let sigObj;
+      let appAccount; 
+
+      before(async () => {
+      appAccount = web3.eth.accounts.create(); 
+      console.log('address', registry)
+      sigObj = await signData(
+          appAccount.address,
+          appAccount.address,
+          Buffer.from(
+              stripHexPrefix(appAccount.privateKey.toLowerCase()),
+              "hex"
+            ),
+          Buffer.from("changeOwner").toString("hex") +
+          stripHexPrefix(registry)
+      );
+      console.log('appAddress', appAccount.address, sigObj, registry)
+
+      });
+
+      it("should create Ethereum Account for app", async () => {
+   
+
+        let value = await marketCore.changeOwnerSigned(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, registry,
+        { from: account })
+
+        
+          console.log(value)
+
+          let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), stringToBytes32('hase'), 22000, {from: account})
+      console.log(value2)
+       
+        // const sig = utils.ecsign(app.signHash(), appAccount.privateKey);
+    })
+
+   /*  it("should register created App at Registry", async () => {
+  
+      let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), stringToBytes32('hase'), 22000, {from: account})
+      console.log(value2)
+    }) */
+
+     
+    })
     
     describe("register APP", () => {
         let client = this;  
@@ -154,10 +240,13 @@ contract('MarketCore', function (accounts) {
 
             client.app = app; 
 
+            console.log(client.app)
+
             let sigObj;
             let appAccount; 
 
             before(async () => {
+            // create an Ethereum Account 
             appAccount = web3.eth.accounts.create(); 
 
             sigObj = await signData(
@@ -201,7 +290,8 @@ contract('MarketCore', function (accounts) {
                     const r =  utils.bufferToHex(sig.r); 
                     const s = utils.bufferToHex(sig.s); 
                     const v = utils.bufferToHex(sig.v); 
-    /* 
+    
+                    /* 
                     const r = sig.r;
                     const s = sig.s;
                     const v= sig.v; */
