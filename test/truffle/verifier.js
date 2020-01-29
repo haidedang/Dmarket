@@ -16,6 +16,8 @@ var Web3 = require('web3')
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider); 
 
+
+
 // Fixed Ganache Accounts, these will stay static. Account [0]
 const privateKey = Buffer.from("569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a", "hex")
 const address = '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2';
@@ -168,13 +170,13 @@ contract('MarketCore', function (accounts) {
                     "hex"
                   ),
                 Buffer.from("changeOwner").toString("hex") +
-                stripHexPrefix(registry)
+                stripHexPrefix(account)
             );
     
             });
 
             it("should create Ethereum Account for app", async () => {
-                let value = await marketCore.registerEntity(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, registry,
+                let value = await marketCore.registerEntity(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, account,
                 { from: account })
                 
                   console.log(value)
@@ -201,7 +203,7 @@ contract('MarketCore', function (accounts) {
                     const r =  utils.bufferToHex(sig.r); 
                     const s = utils.bufferToHex(sig.s); 
                     const v = utils.bufferToHex(sig.v); 
-    /* 
+              /* 
                     const r = sig.r;
                     const s = sig.s;
                     const v= sig.v; */
@@ -231,29 +233,34 @@ contract('MarketCore', function (accounts) {
 
         describe("_updateEntity()", () => {
             let key;
+            let cid; 
 
             before(async () => {
-                 key = utils.keccak256('app/version', 'utf8');
+                 // key = utils.keccak256('app/version', 'utf8');
+                 key = stringToBytes32('MTrust');
             })
 
             it("should generateIPFSHash()", async () => {
                 // MTrust=  {app, signature}
                 const doc = JSON.stringify(client.app)
-                const cid = await ipfs.add(doc);
+                 cid = await ipfs.add(doc);
                   
-               // console.log("IPFS cid:", cid);       
-                // console.log(await ipfs.cat(cid));
+                console.log("IPFS cid:", cid);       
+                console.log(await ipfs.cat(cid));
             })
     
-            it("should write app to registry ERC780", async () => {
+            it("should write app data to registry ERC780", async () => {
                 // Defining what goes in, Define the path 
                // console.log(key)
 
                // key : IPFS Hash.  
-               await marketCore._updateEntity(address, address, key, sig);
-               let value =  await marketCore.Test.call(address, key, {from:address}); 
-               // console.log(value)
-               assert.equal(sig, value); 
+               await marketCore._updateEntity(address, address, key, stringToBytes32(cid));
+                
+            })
+
+            it("fetch the app correctly", async () => {
+              let value =  await marketCore.Test.call(address, key, {from:address}); 
+               assert.equal(cid, bytes32ToString(value));
             })
 
             /* it("should register app to registry ERC1056", async() => {
