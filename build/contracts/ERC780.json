@@ -3703,10 +3703,16 @@
       "links": {},
       "address": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
       "transactionHash": "0xcd45bb2de60484ba8e3f989cf6fbedd6c05527969c3cae3ea18fb10346069fa2"
+    },
+    "1580282846205": {
+      "events": {},
+      "links": {},
+      "address": "0xCeeFD27e0542aFA926B87d23936c79c276A48277",
+      "transactionHash": "0x5ce7905034cbe156c292dc90d938b2c7a2bc73677ba60f3bc4a93b2a2c919706"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2020-01-28T12:57:03.452Z",
+  "updatedAt": "2020-01-29T07:47:47.652Z",
   "devdoc": {
     "methods": {}
   },

@@ -43,12 +43,10 @@ function stripHexPrefix(str) {
       return str.slice(2);
     }
     return str;
-  }
-
+}
 function bytes32ToString(bytes) {
     return Buffer.from(bytes.slice(2).split("00")[0], "hex").toString();
-  }
-
+}
 function stringToBytes32 (str) {
     const buffstr =
       '0x' +
@@ -56,8 +54,7 @@ function stringToBytes32 (str) {
         .slice(0, 32)
         .toString('hex')
     return buffstr + '0'.repeat(66 - buffstr.length)
-  }
-
+}
 function attributeToHex (key, value) {
     if (Buffer.isBuffer(value)) {
       return `0x${value.toString('hex')}`
@@ -74,20 +71,18 @@ function attributeToHex (key, value) {
       return value
     }
     return `0x${Buffer.from(value).toString('hex')}`
-  }
+}
 
 function leftPad(data, size = 64) {
     if (data.length === size) return data;
     return "0".repeat(size - data.length) + data;
-  }
-
+}
 
 contract('MarketCore', function (accounts) {
-    let account = accounts[0]
-    let marketCore;
-    let registry; 
-
-    async function signData(identity, signer, key, data) {
+  let account = accounts[0]
+  let marketCore;
+  let registry; 
+  async function signData(identity, signer, key, data) {
         //call nonce of ERC1056 out of marketCore Contract somehow. 
        // TODO: [Issue - #5 Verifiers.js/Nonce]  const nonce = await registry.nonce(signer);
        const nonce = 0; 
@@ -111,56 +106,51 @@ contract('MarketCore', function (accounts) {
           s: "0x" + signature.s.toString("hex"),
           v: signature.v
         };
-      }
+  }
 
-    // [TICKET] #26 
-    describe("createEntity", () => { 
-      before(async() => {
-        marketCore = await MarketCore.deployed();
-        // Get ERC1056 address 
-        registry = await marketCore.registry();
-       });
+  before(async() => {
+    marketCore = await MarketCore.deployed();
+    // Get ERC1056 address 
+    registry = await marketCore.registry();
+  });
 
-     /*  const myDomain = new EIP712Domain({
+  describe("register APP", () => {
+    let client = this;  
+    let sig;
+
+    let sigObj; 
+    let appAccount; 
+    let doc; 
+    let cid; 
+    const myDomain = new EIP712Domain({
         name: "Marketplace Registry",               // Name of the domain
         version: "1",                     // Version identifier for this domain
         chainId: 1574864255528,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
         verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070',  // Address of smart contract associated with this domain
-        salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558" 
-      })
+        salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"          // Random string to differentiate domain, just in case
+    })
+    const App = myDomain.createType('App', [
+        
+        { name: 'owner', type: 'address'},    // fest 
+        { name: 'author' , type: 'address'},  //fest
+        { name : 'appName', type: 'string'}, // fest 
+        { name: 'description', type: 'string'},
+        { name: 'issuer', type: 'address'}, // fest 
+        { name: 'downloadLink', type: 'string'}
+    ])
+    const app = new App({
+        owner: address,
+        author: address,
+        appName: 'Instagram',
+        description: 'A cool app',
+        issuer: address,
+        downloadLink: 'YOLOSWAG'
+        })
 
-      const App = myDomain.createType('App', [
-        {name: 'name', type: 'string'},
-        {name: 'description', type: 'string'},
-        {name: 'image', type: 'string'},
-      ])
+    client.app = app; 
 
-      const Api = myDomain.createType('Api', [
-        {name: 'name', type: 'string'},
-        {name: 'description', type: 'string'}, 
-        {name: 'documentation', type: 'string'}
-      ])
-
-      const AppVersion = myDomain.createType('AppVersion', [
-        {name: 'name', type: 'string'},
-        {name: 'releaseNotes', type: 'string'},
-        {name: 'version', type: 'string'},
-        {name: 'downloadUrl', type:'string'},
-      ])
-
-      const ApiVersion = myDomain.createType('ApiVersion', [
-        {name: 'name', type: 'string'},
-        {name: 'description', type: 'string'}, 
-        {name: 'documentation', type: 'string'},
-        {name: 'version', type: 'version'}
-      ]) */
-
-      let sigObj;
-      let appAccount; 
-
-      before(async () => {
+    before(async () => {
       appAccount = web3.eth.accounts.create(); 
-      console.log('address', registry)
       sigObj = await signData(
           appAccount.address,
           appAccount.address,
@@ -169,225 +159,151 @@ contract('MarketCore', function (accounts) {
               "hex"
             ),
           Buffer.from("changeOwner").toString("hex") +
-          stripHexPrefix(registry)
+          stripHexPrefix(marketCore.address)
       );
-      console.log('appAddress', appAccount.address, sigObj, registry)
-
-      });
-
-      it("should create Ethereum Account for app", async () => {
-   
-
-        let value = await marketCore.changeOwnerSigned(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, registry,
-        { from: account })
-
+    });
+    
+    //Create the App Client Side , THIS IS NOT SMART CONTRACT TEST ... 
+    describe("should createApp", () => {
+      describe("as owner", () => {
+        it("should create Ethereum Account for app", async () => {
+          let value = await marketCore.changeOwnerSigned(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, marketCore.address,
+          { from: account })
+          // const sig = utils.ecsign(app.signHash(), appAccount.privateKey);
+        })
+        it("should have mapped owner to Registry", async() => {
+          let value = await marketCore.showOwner.call(appAccount.address,  {from:account})
+          assert.equal(value, marketCore.address);
+        })
+        it("should generateIPFSHash()", async () => {
+          // MTrust=  {app, signature}
+            doc = JSON.stringify(client.app)
+            cid = await ipfs.add(doc) 
+          })
         
-          console.log(value)
-
-          let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), stringToBytes32('hase'), 22000, {from: account})
-      console.log(value2)
-       
-        // const sig = utils.ecsign(app.signHash(), appAccount.privateKey);
-    })
-
-   /*  it("should register created App at Registry", async () => {
+        it("should register created App at Registry", async () => {
+          let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from(cid).toString("hex"), 22000, account, {from: account})
+          // console.log(value2)
+          // assert.equal(value2, marketCore.address)
+        })
+        it("should update the owner in Registry", async() => {
+          const length = await marketCore.getAllEntities.call(); 
+          for( let i = 0 ; i < length; i ++){
+            console.log('entity');
+          }
   
-      let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), stringToBytes32('hase'), 22000, {from: account})
-      console.log(value2)
-    }) */
-
-     
-    })
-    
-    describe("register APP", () => {
-        let client = this;  
-        let sig;
-        
+          // Fetch all entities, look up the data in the event log
+        })
+        it("should update entity", async() => {
+          let value = await marketCore._updateEntity2(appAccount.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from('changed').toString("hex"),22000, {from: account}); 
+          //console.log(value)
+        })
+      })
+      describe("as member of an organization", () => {
+        let organizationAccount;
+        let sigObj;
         before(async() => {
-            marketCore = await MarketCore.deployed();
-            // Get ERC1056 address 
-            registry = await marketCore.registry();
-        });
-
-        //Create the App Client Side 
-        describe("createApp", () => {
-            const myDomain = new EIP712Domain({
-                name: "Marketplace Registry",               // Name of the domain
-                version: "1",                     // Version identifier for this domain
-                chainId: 1574864255528,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
-                verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070',  // Address of smart contract associated with this domain
-                salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"          // Random string to differentiate domain, just in case
-            })
-
-            const App = myDomain.createType('App', [
-                
-                { name: 'owner', type: 'address'},    // fest 
-                { name: 'author' , type: 'address'},  //fest
-                { name : 'appName', type: 'string'}, // fest 
-                { name: 'description', type: 'string'},
-                { name: 'issuer', type: 'address'}, // fest 
-                { name: 'downloadLink', type: 'string'}
-            ])
-            
-            let app = new App({
-                owner: address,
-                author: address,
-                appName: 'Instagram',
-                description: 'A cool app',
-                issuer: address,
-                downloadLink: 'YOLOSWAG'
-                })
-
-            client.app = app; 
-
-            console.log(client.app)
-
-            let sigObj;
-            let appAccount; 
-
-            before(async () => {
-            // create an Ethereum Account 
-            appAccount = web3.eth.accounts.create(); 
-
-            sigObj = await signData(
-                appAccount.address,
-                appAccount.address,
-                Buffer.from(
-                    stripHexPrefix(appAccount.privateKey.toLowerCase()),
-                    "hex"
-                  ),
-                Buffer.from("changeOwner").toString("hex") +
-                stripHexPrefix(registry)
-            );
-    
-            });
-
-            it("should create Ethereum Account for app", async () => {
-                let value = await marketCore.registerEntity(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, registry,
-                { from: account })
-                
-                  console.log(value)
-                // const sig = utils.ecsign(app.signHash(), appAccount.privateKey);
-            })
-            /* it("should change owner mapping", async () => {
-                const owner2 = await didReg.owners();
-                assert.equal(owner2, appAccount);
-              }); */
+          organizationAccount = web3.eth.accounts.create(); 
+          sigObj = await signData(
+            organizationAccount.address,
+            organizationAccount.address,
+            Buffer.from(
+              stripHexPrefix(organizationAccount.privateKey.toLowerCase()),
+              "hex"
+            ),
+            Buffer.from("changeOwner").toString("hex")+
+            stripHexPrefix(marketCore.address)
+          )
         })
-                
-        describe("verifyApp()", () => {
-                let app = client.app;
+        
+        it("should create Organization Account for user (Account)", async() => {
+          await marketCore.changeOwnerSigned(organizationAccount.address, sigObj.v, sigObj.r, sigObj.s, marketCore.address, {from: account})
 
-                it('should show web3 version', () => {
-                    
-                })
-
-                it("should return true", async() => {
-                    
-                    // Ethereum Signature Function 
-                    sig = utils.ecsign(app.signHash(), privateKey);
-                    
-                    const r =  utils.bufferToHex(sig.r); 
-                    const s = utils.bufferToHex(sig.s); 
-                    const v = utils.bufferToHex(sig.v); 
-    
-                    /* 
-                    const r = sig.r;
-                    const s = sig.s;
-                    const v= sig.v; */
-                    
-                    /* console.log(app)
-                    console.log(web3.currentProvider) */
-
-                    const value = await marketCore.verifyApp(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink, r, s, v); 
-                    
-                    /* console.log(marketCore.methods)
-                    console.log(utils.bufferToHex(privateKey))
-                    console.log(r,s,v)
-                    console.log(utils.bufferToHex(sig.r), utils.bufferToHex(sig.s),utils.bufferToHex(sig.v)) */
-
-                    // signature composed of all parameters 
-                    // console.log('Whole Signature',utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))]))))
-                    // store the whole string in a variable  
-                    sig = utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))])));
-
-                    client.app.signature = sig; 
-                    /* let signature = utils.keccak256(sig); 
-                    console.log(utils.bufferToHex(signature)) */
-
-                    assert.equal(value, true)
-                })
-            }) 
-
-        describe("_updateEntity()", () => {
-            let key;
-
-            before(async () => {
-                 key = utils.keccak256('app/version', 'utf8');
-            })
-
-            it("should generateIPFSHash()", async () => {
-                // MTrust=  {app, signature}
-                const doc = JSON.stringify(client.app)
-                const cid = await ipfs.add(doc);
-                  
-               // console.log("IPFS cid:", cid);       
-                // console.log(await ipfs.cat(cid));
-            })
-    
-            it("should write app to registry ERC780", async () => {
-                // Defining what goes in, Define the path 
-               // console.log(key)
-
-               // key : IPFS Hash.  
-               await marketCore._updateEntity(address, address, key, sig);
-               let value =  await marketCore.Test.call(address, key, {from:address}); 
-               // console.log(value)
-               assert.equal(sig, value); 
-            })
-
-            /* it("should register app to registry ERC1056", async() => {
-                var hash = "0x" + abi.soliditySHA3(
-                    ["uint8","uint8","address","address"],
-                    [0x19,0,"0x8c1ed7e19abaa9f23c476da86dc1577f1ef401f5", recipient]
-                  ).toString("hex");
-                
-                const sig = utils.ecsign(hash, privateKey);
-                console.log(sig); 
-
-
-                // Create a new Ethereum DID conform account on specified network 
-                // Account 1 - Ganache 
-                const keypair = {
-                    address: '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2',
-                    privateKey: '569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a' 
-                };
-                
-                const registryAddress='0xFE5ca4BD7918d2828305d904325df42c5b60a143';
-                
-                const ethrDid = new EthrDID({address : keypair.address, provider:provider, registry:registryAddress});
-                
-                ethrDid.setAttribute('did/svc/HubService', 'https://hubs.uport.me', 10000)
-                .then(res => console.log('Ethr DID\n\n', res))
-                .catch(e => console.log(e))
-                    
-                let did = 'did:ethr:' + keypair.address; 
-                
-                registerEthrDidToResolver({provider: provider, registry:registryAddress})
-                resolve.default(did).then(doc => console.log(doc)).catch(e => console.log(e))
-                  
-            }) */
         })
+
+      })
     })
 
-    describe("delete App", () => {
-    })
+    describe("should deleteApp", () => {})
+                
+    describe("verifyApp()", () => {
+      let app = client.app;
 
-    describe("rate App", () => {
-    })
+      it('should show web3 version', () => {
+      })
 
-    describe("register AppVersion()", () => {
-    })
+      it("should return true", async() => {
+        // Ethereum Signature Function 
+        sig = utils.ecsign(app.signHash(), privateKey);
+        
+        const r =  utils.bufferToHex(sig.r); 
+        const s = utils.bufferToHex(sig.s); 
+        const v = utils.bufferToHex(sig.v); 
 
+        /* 
+        const r = sig.r;
+        const s = sig.s;
+        const v= sig.v; */
+        
+        /* console.log(app)
+        console.log(web3.currentProvider) */
+
+        const value = await marketCore.verifyApp(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink, r, s, v); 
+        
+        /* console.log(marketCore.methods)
+        console.log(utils.bufferToHex(privateKey))
+        console.log(r,s,v)
+        console.log(utils.bufferToHex(sig.r), utils.bufferToHex(sig.s),utils.bufferToHex(sig.v)) */
+
+        // signature composed of all parameters 
+        // console.log('Whole Signature',utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))]))))
+        // store the whole string in a variable  
+        sig = utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))])));
+
+        client.app.signature = sig; 
+        /* let signature = utils.keccak256(sig); 
+        console.log(utils.bufferToHex(signature)) */
+
+        assert.equal(value, true)
+      })
+    }) 
+
+    /* describe("_updateEntity()", () => {
+        let key;
+
+        before(async () => {
+              key = utils.keccak256('app/version', 'utf8');
+        })
+
+        it("should generateIPFSHash()", async () => {
+            // MTrust=  {app, signature}
+            const doc = JSON.stringify(client.app)
+            const cid = await ipfs.add(doc);
+              
+            // console.log("IPFS cid:", cid);       
+            // console.log(await ipfs.cat(cid));
+        })
+
+        it("should write app to registry ERC780", async () => {
+            // Defining what goes in, Define the path 
+            // console.log(key)
+
+            // key : IPFS Hash.  
+            await marketCore._updateEntity(address, address, key, sig);
+            let value =  await marketCore.Test.call(address, key, {from:address}); 
+            // console.log(value)
+            assert.equal(sig, value); 
+        })
+    }) */
+  })
+
+  describe("delete App", () => {
+  })
+
+  describe("rate App", () => {
+  })
+
+  describe("register AppVersion()", () => {
+  })
 
 });

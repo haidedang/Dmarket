@@ -17,23 +17,36 @@ contract MarketPlaceBase is Verifier{
   string public constant TYPE_APPVERSION = "appVersion";
   string public constant TYPE_APIVERSION = "apiVersion"; 
   bytes32 public constant DELEGATE_ADMIN = keccak256(bytes("admin"));
-  bytes32 public constant DELEGATE_MEMBER = keccak256(bytes("member"));
+  //bytes32 public constant DELEGATE_MEMBER = keccak256(bytes("member"));
 
   // This holds all organization, app and api IDs registered in the marketplace 
-  address[] entity; 
+  address[] entityIndex; 
 
   // This maps the owner of entity to the respective entity. because ownership is transferred to the marketplace, the owner needs to be specified here. The ownership is being transferred, so delegates and other dudes can write to the DECENTRALIZED RESSOURCE RECORDS, or the ERC 1056 data storage. 
-  mapping(uint256 => address) EntityIndexToOwner; 
-  mapping(address => uint) entityOwner; 
+  mapping (address => uint) entity; 
+  mapping(address => address) EntityOwner; 
 
   function changeOwnerSigned(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner ) public{
     registry.changeOwnerSigned(identity, sigV, sigR, sigS, newOwner);
   }
 
-  function registerEntity(address identity, bytes32 name, bytes memory value, uint validity) public {
-      registry.setAttribute(identity, name, value, validity);
-      // entity.push(identity); 
-      // EntityIndexToOwner[entity.length -1] = msg.sender; 
+  function showOwner(address identity) public view returns(address){
+   return registry.identityOwner(identity); 
+  }
+
+  function registerEntity(address identity, bytes32 name, bytes memory value, uint validity, address newOwner) public {
+     registry.setAttribute(identity, name, value, validity);
+     uint entityID = entityIndex.push(identity) -1;
+     entity[identity] = entityID; 
+     EntityOwner[identity] = newOwner; 
+  }
+
+  function _updateEntity2(address identity, bytes32 name, bytes memory value, uint validity) public {
+    // Msg.sender is either the owner of the identity 
+    // If he is part of an organization, and he is not an admin he can be a DElegate of the application. But nevertheless he has to be part of the organization. So he still needs to be an admin of the app and be a validDelegate of the company. 
+    require(EntityOwner[identity]== msg.sender || registry.validDelegate(EntityOwner[identity], DELEGATE_ADMIN, msg.sender));
+    
+    registry.setAttribute(identity, name, value, validity);
   }
 
   // Ownership is handled in ERC1056
@@ -50,6 +63,12 @@ contract MarketPlaceBase is Verifier{
       claimRegistry.setClaim(identity, key , signature);  
   }
 
+  function getAllEntities() public view returns(uint){
+    return entityIndex.length; 
+  }
+
+  
+
   // registers Entity to ERC1056 
 /*   function _updateEntityERC1056() public {
       require( actor == registry.identityOwner(identity) || 
@@ -58,8 +77,6 @@ contract MarketPlaceBase is Verifier{
               );
   } */
 
-
-
   function Test(address identity, bytes32 key) public view returns (bytes32) {
     return claimRegistry.getClaim(address(this), identity, key); 
   }
@@ -67,22 +84,5 @@ contract MarketPlaceBase is Verifier{
   function _deleteEntity() internal {
 
   }
-    
-    /* uint256 constant chainId = 1573916018149;
-    address constant verifyingContract = 0x1C56346CD2A2Bf3202F771f50d3D14a367B48070;
-    bytes32 constant salt = 0x77a604b8f7c68ecb34d6df338028f7fad929e2a3c98c72b3a1243f1d4dfac9b1;
-
-    string private constant EIP712_DOMAIN  = "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract,bytes32 salt)";
-
-    bytes32 private constant EIP712_DOMAIN_TYPEHASH = keccak256(abi.encodePacked(EIP712_DOMAIN));
-
-    bytes32 private constant DOMAIN_SEPARATOR = keccak256(abi.encode(
-        EIP712_DOMAIN_TYPEHASH,
-        keccak256("My amazing dApp"),
-        keccak256("2"),
-        chainId,
-        verifyingContract,
-        salt
-    )); */
 
 }

@@ -110,7 +110,7 @@ contract ERC1056 is EthereumDIDRegistryInterface{
   }
 
   function setAttribute(address identity, bytes32 name, bytes memory value, uint validity) public {
-    setAttribute(identity, msg.sender, name, value, validity);
+   setAttribute(identity, msg.sender, name, value, validity);
   }
 
   function setAttributeSigned(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 name, bytes memory value, uint validity) public {
