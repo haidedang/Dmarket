@@ -16,6 +16,8 @@ var Web3 = require('web3')
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider); 
 
+
+
 // Fixed Ganache Accounts, these will stay static. Account [0]
 const privateKey = Buffer.from("569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a", "hex")
 const address = '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2';
