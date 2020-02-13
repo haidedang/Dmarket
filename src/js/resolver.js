@@ -15,7 +15,7 @@ export function bytes32toString(bytes32) {
       .replace(/\0+$/, '')
   }
   
-  export function stringToBytes32(str) {
+export function stringToBytes32(str) {
     const buffstr =
       '0x' +
       Buffer.from(str)
@@ -24,12 +24,12 @@ export function bytes32toString(bytes32) {
     return buffstr + '0'.repeat(66 - buffstr.length)
   }
   
-  export const delegateTypes = {
+export const delegateTypes = {
     Secp256k1SignatureAuthentication2018: stringToBytes32('sigAuth'),
     Secp256k1VerificationKey2018: stringToBytes32('veriKey'),
   }
 
-  export const attrTypes = {
+export const attrTypes = {
     sigAuth: 'SignatureAuthentication2018',
     veriKey: 'VerificationKey2018',
   }

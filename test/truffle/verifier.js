@@ -82,30 +82,30 @@ contract('MarketCore', function (accounts) {
   let account = accounts[0]
   let marketCore;
   let registry; 
-  async function signData(identity, signer, key, data) {
-        //call nonce of ERC1056 out of marketCore Contract somehow. 
-       // TODO: [Issue - #5 Verifiers.js/Nonce]  const nonce = await registry.nonce(signer);
-       const nonce = 0; 
-        const paddedNonce = leftPad(Buffer.from([nonce], 64).toString("hex"));
-        const dataToSign =
-          "1900" +
-          stripHexPrefix(registry) +
-          paddedNonce +
-          stripHexPrefix(identity) +
-          data;
-        const hash = Buffer.from(sha3.buffer(Buffer.from(dataToSign, "hex")));
-        const signature = utils.ecsign(hash, key);
-        const publicKey = utils.ecrecover(
-          hash,
-          signature.v,
-          signature.r,
-          signature.s
-        );
-        return {
-          r: "0x" + signature.r.toString("hex"),
-          s: "0x" + signature.s.toString("hex"),
-          v: signature.v
-        };
+  async function signData(identity, key, data) {
+    //call nonce of ERC1056 out of marketCore Contract somehow. 
+    // TODO: [Issue - #5 Verifiers.js/Nonce]  const nonce = await registry.nonce(signer);
+    const nonce = 0; 
+    const paddedNonce = leftPad(Buffer.from([nonce], 64).toString("hex"));
+    const dataToSign =
+      "1900" +
+      stripHexPrefix(registry) +
+      paddedNonce +
+      stripHexPrefix(identity) +
+      data;
+    const hash = Buffer.from(sha3.buffer(Buffer.from(dataToSign, "hex")));
+    const signature = utils.ecsign(hash, key);
+    const publicKey = utils.ecrecover(
+      hash,
+      signature.v,
+      signature.r,
+      signature.s
+    );
+    return {
+      r: "0x" + signature.r.toString("hex"),
+      s: "0x" + signature.s.toString("hex"),
+      v: signature.v
+    };
   }
 
   before(async() => {
@@ -131,19 +131,15 @@ contract('MarketCore', function (accounts) {
     })
     const App = myDomain.createType('App', [
         
-        { name: 'owner', type: 'address'},    // fest 
         { name: 'author' , type: 'address'},  //fest
         { name : 'appName', type: 'string'}, // fest 
         { name: 'description', type: 'string'},
-        { name: 'issuer', type: 'address'}, // fest 
         { name: 'downloadLink', type: 'string'}
     ])
     const app = new App({
-        owner: address,
         author: address,
         appName: 'Instagram',
         description: 'A cool app',
-        issuer: address,
         downloadLink: 'YOLOSWAG'
         })
 
@@ -181,8 +177,8 @@ contract('MarketCore', function (accounts) {
             cid = await ipfs.add(doc) 
           })
         
-        it("should register created App at Registry", async () => {
-          let value2 = await marketCore.registerEntity(appAccount.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from(cid).toString("hex"), 22000, account, {from: account})
+        it("should register created App ID at Registry", async () => {
+          let value2 = await marketCore.registerEntity(appAccount.address, sigObj.v,  sigObj.r, sigObj.s, stringToBytes32('Dmarket'), '0x'+ Buffer.from(cid).toString("hex"), 22000, account, {from: account})
           // console.log(value2)
           // assert.equal(value2, marketCore.address)
         })
@@ -224,77 +220,85 @@ contract('MarketCore', function (accounts) {
       })
     })
 
+    // before(async () => {
+    //   key = utils.keccak256('app/version', 'utf8');
+    // })
+
     describe("should deleteApp", () => {})
-                
-    describe("verifyApp()", () => {
-      let app = client.app;
-
-      it('should show web3 version', () => {
-      })
-
-      it("should return true", async() => {
-        // Ethereum Signature Function 
-        sig = utils.ecsign(app.signHash(), privateKey);
         
-        const r =  utils.bufferToHex(sig.r); 
-        const s = utils.bufferToHex(sig.s); 
-        const v = utils.bufferToHex(sig.v); 
+  })
+/* 
+  describe("verifyApp()", () => {
+    let sig;
 
-        /* 
-        const r = sig.r;
-        const s = sig.s;
-        const v= sig.v; */
+    let sigObj; 
+    let appAccount; 
+    let doc; 
+    let cid; 
+    const myDomain = new EIP712Domain({
+        name: "Marketplace Registry",               // Name of the domain
+        version: "1",                     // Version identifier for this domain
+        chainId: 1574864255528,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
+        verifyingContract: '0x1C56346CD2A2Bf3202F771f50d3D14a367B48070',  // Address of smart contract associated with this domain
+        salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"          // Random string to differentiate domain, just in case
+    })
+    const App = myDomain.createType('App', [
         
-        /* console.log(app)
-        console.log(web3.currentProvider) */
-
-        const value = await marketCore.verifyApp(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink, r, s, v); 
-        
-        /* console.log(marketCore.methods)
-        console.log(utils.bufferToHex(privateKey))
-        console.log(r,s,v)
-        console.log(utils.bufferToHex(sig.r), utils.bufferToHex(sig.s),utils.bufferToHex(sig.v)) */
-
-        // signature composed of all parameters 
-        // console.log('Whole Signature',utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))]))))
-        // store the whole string in a variable  
-        sig = utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))])));
-
-        client.app.signature = sig; 
-        /* let signature = utils.keccak256(sig); 
-        console.log(utils.bufferToHex(signature)) */
-
-        assert.equal(value, true)
-      })
-    }) 
-
-    /* describe("_updateEntity()", () => {
-        let key;
-
-        before(async () => {
-              key = utils.keccak256('app/version', 'utf8');
+        { name: 'owner', type: 'address'},    // fest 
+        { name: 'author' , type: 'address'},  //fest
+        { name : 'appName', type: 'string'}, // fest 
+        { name: 'description', type: 'string'},
+        { name: 'issuer', type: 'address'}, // fest 
+        { name: 'downloadLink', type: 'string'},
+        { name: 'supportedApp', type: 'address[]'}
+    ])
+    const app = new App({
+        owner: address,
+        author: address,
+        appName: 'Instagram',
+        description: 'A cool app',
+        issuer: address,
+        downloadLink: 'YOLOSWAG',
+        supportedApp: ['0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1']
         })
 
-        it("should generateIPFSHash()", async () => {
-            // MTrust=  {app, signature}
-            const doc = JSON.stringify(client.app)
-            const cid = await ipfs.add(doc);
-              
-            // console.log("IPFS cid:", cid);       
-            // console.log(await ipfs.cat(cid));
-        })
+    it('should show web3 version', () => {
+    })
 
-        it("should write app to registry ERC780", async () => {
-            // Defining what goes in, Define the path 
-            // console.log(key)
+    it("should return true", async() => {
+      // Ethereum Signature Function 
+      sig = utils.ecsign(app.signHash(), privateKey);
+      
+      const r =  utils.bufferToHex(sig.r); 
+      const s = utils.bufferToHex(sig.s); 
+      const v = utils.bufferToHex(sig.v); 
 
-            // key : IPFS Hash.  
-            await marketCore._updateEntity(address, address, key, sig);
-            let value =  await marketCore.Test.call(address, key, {from:address}); 
-            // console.log(value)
-            assert.equal(sig, value); 
-        })
-    }) */
+      const value = await marketCore.verifyApp(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink, app.supportedApp, r, s, v); 
+      
+      // console.log(marketCore.methods)
+      // console.log(utils.bufferToHex(privateKey))
+      // console.log(r,s,v)
+      // console.log(utils.bufferToHex(sig.r), utils.bufferToHex(sig.s),utils.bufferToHex(sig.v))
+
+      // signature composed of all parameters 
+      // console.log('Whole Signature',utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))]))))
+      // store the whole string in a variable  
+      sig = utils.bufferToHex(utils.keccak256(Buffer.concat([sig.r,sig.s, Buffer.from(utils.bufferToHex(v))])));
+
+      app.signature = sig; 
+      // let signature = utils.keccak256(sig); 
+      // console.log(utils.bufferToHex(signature))
+
+      assert.equal(value, true)
+    })
+  }) 
+
+  describe("verifier", () => {
+    it('should call contract function', async() => {
+     let result =  await marketCore.test.call(); 
+     assert.equal(result, 'hey');
+    })
+   
   })
 
   describe("delete App", () => {
@@ -304,6 +308,6 @@ contract('MarketCore', function (accounts) {
   })
 
   describe("register AppVersion()", () => {
-  })
+  }) */
 
 });

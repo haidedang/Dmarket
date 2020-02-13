@@ -5,8 +5,9 @@ import "./MarketPlaceBase.sol";
 
 contract MarketPlaceCore is MarketPlaceBase {
 
-constructor(address _ethereumDIDRegistry, address _claimRegistry) public {
-        registry = EthereumDIDRegistryInterface(_ethereumDIDRegistry); 
-        claimRegistry = ClaimRegistryInterface(_claimRegistry);
+  constructor(address _ethereumDIDRegistry, address _claimRegistry) public {
+      registry = EthereumDIDRegistryInterface(_ethereumDIDRegistry); 
+      claimRegistry = ClaimRegistryInterface(_claimRegistry);
   }
+
 }

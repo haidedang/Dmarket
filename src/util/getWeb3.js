@@ -1,6 +1,4 @@
-import Web3 from 'web3'
-
-
+import Web3 from 'web3' 
 
 let getWeb3 = new Promise(function (resolve, reject) {
 
@@ -21,7 +19,5 @@ let getWeb3 = new Promise(function (resolve, reject) {
   resolve(web3);
   
 })
-
-
 
 export default getWeb3

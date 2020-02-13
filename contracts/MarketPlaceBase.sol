@@ -26,25 +26,31 @@ contract MarketPlaceBase is Verifier{
   mapping (address => uint) entity; 
   mapping(address => address) EntityOwner; 
 
-  function changeOwnerSigned(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner ) public{
-    registry.changeOwnerSigned(identity, sigV, sigR, sigS, newOwner);
+  function registerIdentity(address identity, address newOwner) public {
+    uint entityID = entityIndex.push(identity) -1;
+    entity[identity] = entityID; 
+    EntityOwner[identity] = newOwner; 
+  }
+
+  function registerEntity(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, address newOwner ) public {
+    registry.changeOwnerSigned(identity, sigV, sigR, sigS, address(this));
+    uint entityID = entityIndex.push(identity) -1;
+    entity[identity] = entityID; 
+    EntityOwner[identity] = newOwner; 
   }
 
   function showOwner(address identity) public view returns(address){
    return registry.identityOwner(identity); 
   }
 
-  function registerEntity(address identity, bytes32 name, bytes memory value, uint validity, address newOwner) public {
+  /* function registerEntity(address identity, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 name, bytes memory value, uint validity, address newOwner) public {
      registry.setAttribute(identity, name, value, validity);
-     uint entityID = entityIndex.push(identity) -1;
-     entity[identity] = entityID; 
-     EntityOwner[identity] = newOwner; 
-  }
+  } */
 
   function _updateEntity2(address identity, bytes32 name, bytes memory value, uint validity) public {
     // Msg.sender is either the owner of the identity 
     // If he is part of an organization, and he is not an admin he can be a DElegate of the application. But nevertheless he has to be part of the organization. So he still needs to be an admin of the app and be a validDelegate of the company. 
-    require(EntityOwner[identity]== msg.sender || registry.validDelegate(EntityOwner[identity], DELEGATE_ADMIN, msg.sender));
+    // require(EntityOwner[identity]== msg.sender || registry.validDelegate(EntityOwner[identity], DELEGATE_ADMIN, msg.sender));
     
     registry.setAttribute(identity, name, value, validity);
   }
@@ -65,6 +71,10 @@ contract MarketPlaceBase is Verifier{
 
   function getAllEntities() public view returns(uint){
     return entityIndex.length; 
+  }
+
+  function getEntity(uint index) public view returns(address){
+    return entityIndex[index];
   }
 
   

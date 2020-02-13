@@ -65,9 +65,20 @@ const actions = {
         // upload new object to IFPS 
         // upload User profile on Blockchain 
         // create Organization Object from IFPS 
-        await Organizations.init();
+        /* await Organizations.init();
         await Organizations.createOrganization(payload.address, payload.name);
-        store.dispatch('getOrganization', Organizations)
+        store.dispatch('getOrganization', Organizations) */
+
+        // Create EthereumKeyPair 
+    },
+    async createEntity({commit}, payload){
+        // create Ethereum Key Pair
+        let account = web3.eth.accounts.create();
+        //create IPFS Hash 
+        // create App Object 
+
+
+
     },
     async resetState ({commit}) {
         commit('resetState');
@@ -87,14 +98,14 @@ const actions = {
         }
     },
     async signMessage ({commit}) {
-        EthereumClient.getInstance().then(client => {
+        EthereumClient.getInstance(web3).then(client => {
             client.signMessage()
         })  
     },
 
     async verifyApp({commit}) {
-        EthereumClient.getInstance().then(client => {
-            client.verifyApp1();
+        EthereumClient.getInstance(web3).then(client => {
+            client.registerApp();
         }) 
     }
     

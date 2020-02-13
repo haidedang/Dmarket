@@ -1,204 +1,219 @@
-import getWeb3 from '../util/getWeb3'
+// import getWeb3 from '../util/getWeb3'
 
-import EthrDID from 'ethr-did'
+import { App, Entity, stringToBytes32 } from './entity'
+import { Resolver } from 'did-resolver';
+import ethr from 'ethr-did-resolver';
+const ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
 
-const abi = require('ethereumjs-abi')
-
-/* const HttpProvider = require('ethjs-provider-http')
-let provider = new HttpProvider('http://localhost:8545') */
-import { resolve } from 'did-resolver'
-import registerEthrDidToResolver from 'ethr-did-resolver'
-//const resolve = require('did-resolver')
-//const registerEthrDidToResolver = require('ethr-did-resolver').default;
+import { stringToBytes, bytesToString, bytes32toString } from './entity';
 
 const contract = require('truffle-contract')
 const MarketCore = require('../../build/contracts/MarketPlaceCore.json')
-const  EIP712Domain = require('eth-typed-data').default;
+const ERCRegistryContract = require('../../build/contracts/ERC1056.json')
 
+function fixProvider(contract) {
+  if (typeof contract.currentProvider.sendAsync !== "function") {
+    contract.currentProvider.sendAsync = function () {
+      return contract.currentProvider.send.apply(
+        contract.currentProvider, arguments
+      );
+    };
+  }
+}
 
-let instance; 
-
-const config = {}; 
-config.registryAddress = "0x1C56346CD2A2Bf3202F771f50d3D14a367B48070";
-
-const myDomain = new EIP712Domain({
-    name: "Marketplace Registry",               // Name of the domain
-    version: "1",                     // Version identifier for this domain
-    chainId: 1579946562578,                       // EIP-155 Chain id associated with this domain (1 for mainnet)
-    verifyingContract: config.registryAddress,  // Address of smart contract associated with this domain
-    salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"          // Random string to differentiate domain, just in case
-  })
-
-  const App = myDomain.createType('App', [
-    
-    { name: 'owner', type: 'address'},    // fest 
-    { name: 'author' , type: 'address'},  //fest
-    { name : 'appName', type: 'string'}, // fest 
-    { name: 'description', type: 'string'},
-    { name: 'issuer', type: 'address'}, // fest 
-    { name: 'downloadLink', type: 'string'}
-  ])
-
-let self; 
+let instance;
+let self;
 
 class EthereumClient {
 
-    constructor(web3Instance, marketCore){
-        self = this; 
-        this.web3 = web3Instance
-        this.marketCore = marketCore
-    }
+  constructor(web3Instance, marketCore, registry) {
+    self = this;
+    this.web3 = web3Instance;
+    this.marketCore = marketCore;
+    this.registry = registry;
+  }
 
-    static async getInstance() {
-        if (instance == null) {
-          instance = await EthereumClient.build()
+  static async getInstance(web3Instance) {
+    if (instance == null) {
+      instance = await EthereumClient.build(web3Instance)
+      instance.getUserAccount();
+    }
+    return instance
+  }
+
+  static async build(web3Instance) {
+    //let web3 = await getWeb3
+
+    let marketCoreContract = contract(MarketCore)
+    marketCoreContract.setProvider(web3Instance.currentProvider)
+    fixProvider(marketCoreContract)
+    let marketCore = await marketCoreContract.deployed()
+
+    let ethrRegistryContract = contract(ERCRegistryContract)
+    ethrRegistryContract.setProvider(web3Instance.currentProvider)
+    fixProvider(ethrRegistryContract)
+    let ethrRegistry = await ethrRegistryContract.deployed();
+
+    return new EthereumClient(web3Instance, marketCore, ethrRegistry)
+  }
+
+  async getUserAccount() {
+    let accounts = await this.web3.eth.getAccounts()
+    this.accounts = accounts;
+    return accounts[0];
+  }
+
+  static parseSignature(signature) {
+    var r = signature.substring(0, 64);
+    var s = signature.substring(64, 128);
+    var v = signature.substring(128, 130);
+
+    return {
+      r: "0x" + r,
+      s: "0x" + s,
+      v: parseInt(v, 16)
+    }
+  }
+
+  async createDummyData() {
+    let account = await this.getUserAccount()
+    let data = await this.marketCore.registerIdentity(account, account, { from: account, gas: 3000000 });
+    if (data != undefined) {
+      return true
+    }
+    return false;
+  }
+
+  // ------- ENTITY Marketplace Interface Methods ------------ 
+
+  async getAllEntities() {
+    let result = await this.marketCore.getAllEntities.call();
+    return result
+  }
+
+  async setDataToMarketplace(entity) {
+    let result = await this.marketCore._updateEntity2(
+      entity.address, stringToBytes32('did/dMarket/app'), stringToBytes(entity.ipfsHash), 20000, { from: await self.getUserAccount(), gas: 300000 }
+    )
+  }
+
+  async setAttribute(address, name, value, validity, sender) {
+    await this.marketCore._updateEntity2(address, name, value, validity, { from: sender, gas: 300000 });
+  }
+
+  async resolveDID(address) {
+
+    let resolver = ethr.getResolver({ web3: this.web3, registry: this.registry.address });
+    let didResolver = new Resolver(resolver);
+
+    let doc = await didResolver.resolve('did:ethr:' + address)
+
+    let history = await this.registry.getPastEvents('DIDAttributeChanged', {
+      filter: { identity: address },
+      fromBlock: 0,
+      toBlock: 'latest'
+    })
+
+    for (const event of history) {
+      const name = bytes32toString(event.returnValues.name)
+      const match = name.match(
+        /^did\/(dMarket)\/(\w+)(\/(\w+))?(\/(\w+))?$/
+      )
+      if (match) {
+        const section = match[1];
+        const algo = match[2]
+        if (section == "dMarket") {
+          doc.dMarket = {
+            type: algo,
+            data: bytesToString(event.returnValues.value)
+          }
         }
-        return instance
       }
-
-    static async build() {
-        let web3 = await getWeb3
-        console.log(web3.currentProvider)
-        console.log(web3.version)
-        let marketCoreContract = contract(MarketCore)
-        marketCoreContract.setProvider(web3.currentProvider)
-        let marketCore = await marketCoreContract.deployed()
-        console.log(marketCore.methods)
-
-        return new EthereumClient(web3,marketCore)
     }
 
-    async signMessage() {
-        console.log(this.web3.version)
-        console.log('hey');
-        //console.log(this.web3.eth.accounts.sign('hey', "0x8A87DDC9D4F26D495636BD8C8E0B325D6E81095F8E97CFD09C646890D1D4E6FF".toLowerCase()))
-    }
+    return this.wrapDIDDocument(doc);
+  }
 
-    async getUserAccount() {
-        let accounts = await this.web3.eth.getAccounts()
-        return accounts[0];
+  async wrapDIDDocument(doc) {
+    if (doc.dMarket) {
+      if (doc.dMarket.type = "app") {
+        let result = await ipfs.cat(doc.dMarket.data)
+        doc.dMarket = JSON.parse(result)
+        return doc
+      }
+      return doc
     }
+    return doc
+  }
 
-    static parseSignature(signature) {
-        var r = signature.substring(0, 64);
-        var s = signature.substring(64, 128);
-        var v = signature.substring(128, 130);
-      
-        return {
-            r: "0x" + r,
-            s: "0x" + s,
-            v: parseInt(v, 16)  
+  async registerApp({ author, name, description, downloadLink, supportedApp }) {
+
+    let app = new App(this.web3, {
+      author: author,
+      name: name,
+      description: description,
+      downloadLink: downloadLink,
+      supportedApp: supportedApp
+    })
+
+    let sigObj = await app.setOwnerToMarketplace(self.registry, self.marketCore.address)
+    await self.marketCore.registerEntity(app.address, sigObj.v, sigObj.r, sigObj.s, this.accounts[0],
+      { from: this.accounts[0], gas: 300000 });
+    await app.setIpfsHash();
+    await this.setDataToMarketplace(app);
+
+    return app;
+
+  }
+
+  async registerEntity(web3) {
+    let entity = new Entity(web3);
+    let sigObj = await entity.setOwnerToMarketplace(this.registry, this.marketCore.address);
+    let value = await this.marketCore.registerEntity(entity.address, sigObj.v, sigObj.r, sigObj.s, this.accounts[0],
+      { from: this.accounts[0], gas: 300000 });
+    return value;
+  }
+
+  //-----EXPERIMENTAL---------
+  verifyApp1() {
+    let signer;
+    let message;
+    let signature;
+    return new Promise((resolve, reject) => {
+      this.getUserAccount().then((address) => {
+        signer = address;
+
+        message = {
+          author: address.toLowerCase(),
+          appName: 'Instagram',
+          description: 'A cool app',
+          downloadLink: 'YOLOSWAG',
+          supportedApp: ['0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1']
         }
-    }
 
-    async signPayment(recipient, callback) {
-      var hash = "0x" + abi.soliditySHA3(
-        ["uint8","uint8","address","address"],
-        [0x19,0,"0x8c1ed7e19abaa9f23c476da86dc1577f1ef401f5", recipient]
-      ).toString("hex");
-  
-      console.log(typeof(hash))
-      console.log(hash.length)
-  
-      let prefix = "\x19Ethereum Signed Message:\n"
-      //this is how the hashing of sign works. 
-      let msgHash1 = web3.utils.sha3(prefix+hash)
-      console.log(msgHash1.length)
-  
-      
-       //*/
-      let hashedmessage = web3.eth.accounts.hashMessage(hash);
-  
-      let sigObj = await web3.eth.accounts.sign(hash, "0xa0bd243444a526200ef5cf743dea1065f7de709685e6a05b50ad934addfa3c8f")
-      console.log(sigObj)
-     // console.log("result",hashedmessage)
-      //console.log(hashedmessage.length)
-      //console.log(sigObj.messageHash)
-      //let privateKey = "0xa0bd243444a526200ef5cf743dea1065f7de709685e6a05b50ad934addfa3c8f"
-  
-      //web3.eth.personal.sign(hash, "0x1f2f7bb9d6c12955988c10db46d30cfdae43df21", callback).then(console.log);
-     // let sigObj = await web3.eth.personal.sign(hash, privateKey)
-      //let msgHash2 = sigObj.messageHash;
-      // console.log(msgHash2)
-      //web3.personal.sign(hash, web3.eth.defaultAccount, callback);
-    }
+        let app = JSON.stringify(new App(message));
 
-    //-----EXPERIMENTAL---------
-     verifyApp1() {
-        let app 
-        let appData; 
-        let signer ;
-        return new Promise((resolve, reject) => {
-            this.getUserAccount().then((address) => {
-                app = new App({
-                    owner: address.toLowerCase(),
-                    author: address.toLowerCase() ,
-                    appName: 'Instagram',
-                    description: 'A cool app',
-                    issuer: address.toLowerCase(),
-                    downloadLink: 'YOLOSWAG'
-                  })
-                console.log(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink)
-                signer = address
-                //const signer = this.web3.eth.accounts[0];
-                
-                appData = [typeof(app.owner), typeof(app.author), typeof(app.appName), typeof(app.description), typeof(app.issuer), typeof(app.downloadLink)]; 
-                const data = JSON.stringify(app.toSignatureRequest());
-                console.log(data)
-                let signature; 
-    
-                this.web3.currentProvider.sendAsync(
-                    {
-                        method:"eth_signTypedData_v3",
-                        params:[signer, data],
-                        from: signer
-                    },
-                    
-                function(err, result) {
-                  if (err || result.error) {
-                    return console.error(result);
-                  }
-                signature = EthereumClient.parseSignature(result.result.substring(2));
-                
-                resolve(signature)
-                }
-                )
-            })
-        }).then((signature)=> {
-            console.log(signature)
-            // DAMN SON, YOU FUCKING DUMBASS MOTHERFUCKER 
-            self.marketCore.verifyApp(app.owner, app.author, app.appName, app.description, app.issuer, app.downloadLink, signature.r, signature.s, signature.v).then(console.log)
-            //self.marketCore.test('Geht', signer, signature.r, signature.s, signature.v).then(console.log)
-
-            // Post it on the Blockchain. 
-        })
-    }
-
-    verifyApp2(){
-      // Create a new Ethereum DID conform account on specified network 
-      // Account 1 - Ganache 
-      const keypair = {
-        address: '0xd7a360fda97109dae2d94eaf93c7150824ebe3b2',
-        privateKey: '569e863fdfd0aa3b93298ff0f34c787f3a80c19adedee3cf56a6d28aa77aca9a' 
-      };
-
-      const registryAddress='0x57605772a7736C66063126573d996596fbE04110';
-
-      const ethrDid = new EthrDID({address : keypair.address, provider:this.web3.currentProvider, registry:registryAddress});
-
-      ethrDid.setAttribute('did/svc/HubService', 'https://hubs.uport.me', 10000)
-      .then(res => console.log('Ethr DID\n\n', res))
-      .catch(e => console.log(e))
-        
-      let did = 'did:ethr:' + keypair.address; 
-      console.log(this.web3.currentProvider)
-      registerEthrDidToResolver({provider: this.web3.currentProvider, registry:registryAddress})
-      resolve(did).then(doc => console.log(doc)).catch(e => console.log(e))
-    }
-
-    verifyApp(){
-      this.signPayment();
-    }
+        this.web3.currentProvider.sendAsync(
+          {
+            method: "eth_signTypedData_v4",
+            params: [signer, app],
+            from: signer
+          },
+          function (err, result) {
+            if (err || result.error) {
+              return console.error(result);
+            } else {
+              signature = EthereumClient.parseSignature(result.result.substring(2));
+              resolve(signature)
+            }
+          }
+        )
+      })
+    }).then((signature) => {
+      console.log(signature)
+      self.marketCore.verifyApp(message.owner, message.author, message.appName, message.description, message.issuer, message.downloadLink, message.supportedApp, signature.r, signature.s, signature.v).then(result => console.log('result', result))
+    })
+  }
 
 }
 
