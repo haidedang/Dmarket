@@ -84,11 +84,11 @@ class EthereumClient {
   // ------- ENTITY Marketplace Interface Methods ------------ 
 
   async getAllEntities() {
-    
      let result = await this.marketCore.getAllEntities.call();
      return result
   }
 
+  // 
   async getAllEntitiesByLogs() {
     /**
       * Query all event logs of ERC1056
@@ -97,12 +97,30 @@ class EthereumClient {
       fromBlock: 0,
       toBlock: 'latest'
     })
-    // now an identity has multiple attribute changed events. i will need the latest attribute of Apps and api. 
-    
-    // filter out those with distinct identities 
-    // filter out from those identities only did/dmarket. 
+    // now an identity has multiple attribute changed events.
+    // i will need the latest attribute of Apps and api. 
+    // Solution : take the attribute in the latest Block! 
+   
+    console.log('Number of Entities', history.length)
 
-    return history
+    // filter out those with distinct identities 
+    let arr = [];
+    for (const event of history) {
+      const name = bytes32toString(event.returnValues.name)
+      const match = name.match(
+        /^did\/(dMarket)\/(\w+)(\/(\w+))?(\/(\w+))?$/
+      )
+      if (match) {
+        const section = match[1];
+        if (section == "dMarket") {
+          arr.push(event.returnValues.identity); 
+        }
+      }
+    }
+
+    let entities = [...new Set(arr)]; 
+    // filter out from those identities only did/dmarket. 
+    return entities 
   }
 
   async setDataToMarketplace(entity) {

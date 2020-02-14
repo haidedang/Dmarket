@@ -6,8 +6,6 @@ const Web3 = require('web3');
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider);
 
-
-
 let Resolver;
 
 jest.setTimeout(60000);
@@ -67,7 +65,7 @@ describe('EthereumClient', () => {
         it("fetch all entities", async() => {
             let result =  await instance.getAllEntities(); 
             for (let i = 0; i< result; i++){
-              let result =  await instance.marketCore.getEntity(i); 
+              let result = await instance.marketCore.getEntity(i); 
                apps.push(result)
             }
            // console.log(apps)
@@ -75,7 +73,6 @@ describe('EthereumClient', () => {
 
         it("fetch all entities by Logs", async() => {
             let result = await instance.getAllEntitiesByLogs(); 
-
             console.log(result)
             console.log(result.length)
         })

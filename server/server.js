@@ -25,9 +25,9 @@ server.listen(config.port, async function () {
     await dMarket.init();
     /* await dMarket.createDummyData(); */
    
-   let result =  await dMarket.getAllEntities(); 
-   console.log(result[0])
+   //let result =  await dMarket.loadAllEntities(); 
+   // console.log(result)
    
-   await dMarket.getAllApps();
+  //  await dMarket.getAllApps();
 })
 

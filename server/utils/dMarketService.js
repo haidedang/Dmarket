@@ -3,7 +3,9 @@
  */
 
 import EthereumClient from '../../src/js/EthereumClient';
-
+import { App } from '../../src/js/entity';
+import AppDB from '../models/App'; 
+ 
 const Web3 = require('web3');
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider);
@@ -13,7 +15,7 @@ class DMarketService {
     async init(){
           let instance = await EthereumClient.getInstance(web3);
           this.instance = instance; 
-          this.entities = await this.getAllEntities(); 
+          this.entities = await this.loadAllEntities(); 
     }
     
     /* async createDummyData(){
@@ -27,19 +29,40 @@ class DMarketService {
         }
     }
  */
-    async getAllEntities(){
-        // save all the entities in the DB 
-        // let instance = await EthereumClient.getInstance(web3)
-
-        // 
-        let result = await this.instance.getAllEntities(); 
-        // for each entity, depending on what type it is- > store it as the respective type in mongoDB. 
-        let entities = []; 
-        for(let i = 0; i< result; i++) {
-            let result = await this.dmarket.resolve('did:ethr:' + await this.instance.getUserAccount()); 
-            entities.push(result); 
+    async loadAllEntities(){
+        
+        /**
+         * result = [ 'EntityAddresses']
+         */
+        let result = await this.instance.getAllEntitiesByLogs(); 
+        
+        for(let i = 0; i< result.length; i++) {
+            await this.saveEntityToDB(result[i]); 
         }
-        return entities; 
+        // for each entity, depending on what type it is-> store it as the respective type in mongoDB. 
+       
+        // return saveEntityToDB(result);
+        
+    }
+
+    async saveEntityToDB(entityAddress){
+        
+            // resolve the entity 
+            let entity = await this.instance.resolveDID(entityAddress);
+            const type = entity.dMarket.primaryType; 
+            switch(type) {
+                case 'App': 
+                    //save entity to DB 
+                    const app = new AppDB(entity.dMarket.message);
+                    app.save((err,saved) => {
+                        if(err) {
+                            console.log(err)
+                        }
+                    })
+                    console.log('app saved', app)
+            }
+        
+        // return entities; 
     }
 
     async getAllApps() {
@@ -49,7 +72,7 @@ class DMarketService {
         console.log(newArray)
     }
 
-    async listenforEvents(){ 
+    async listenforEvents(){
         // save newly created Entities in the mongoDB right away. 
     }
 

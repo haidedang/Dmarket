@@ -15,11 +15,12 @@ module.exports = {
         salt: "0xf2d857f4a3edcb9b78b4d503bfe733db1e3f6cdc2b7971ee739626c97e86a558"
     },
     applicationSchema : [
+        { name: 'id', type: 'address'},
         { name: 'author' , type: 'address'},  //fest
         { name: 'name', type: 'string'}, // fest 
         { name: 'description', type: 'string'},
         { name: 'downloadLink', type: 'string'},
-        { name: 'Releases', type: 'address[]'}
+        { name: 'appReleases', type: 'address[]'}
     ],
     applicationVersionSchema: [],
     apiSchema: [],

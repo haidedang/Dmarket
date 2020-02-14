@@ -135,11 +135,12 @@ export class App extends Entity {
         this.domain = dMarket.domainData,
         this.primaryType = "App",
         this.message = {
+            id: this.address,
             author: author,
             name: appName,
             description: description,
             downloadLink: downloadLink,
-            supportedApp: supportedApp
+            appReleases: supportedApp
         }; 
     }
 }
