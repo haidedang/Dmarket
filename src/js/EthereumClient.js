@@ -87,8 +87,21 @@ class EthereumClient {
   // ------- ENTITY Marketplace Interface Methods ------------ 
 
   async getAllEntities() {
-    let result = await this.marketCore.getAllEntities.call();
-    return result
+    
+     let result = await this.marketCore.getAllEntities.call();
+     return result
+  }
+
+  async getAllEntitiesByLogs() {
+    /**
+      * Query all event logs of ERC1056
+      */
+    let history = await this.registry.getPastEvents('DIDAttributeChanged', {
+      fromBlock: 0,
+      toBlock: 'latest'
+    })
+    // now an identity has multiple attribute changed events. i will need the latest attribute of Apps and api. 
+    return history
   }
 
   async setDataToMarketplace(entity) {

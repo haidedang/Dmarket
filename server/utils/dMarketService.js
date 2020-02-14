@@ -13,7 +13,6 @@ class DMarketService {
     async init(){
           let instance = await EthereumClient.getInstance(web3);
           this.instance = instance; 
-          this.dmarket = new DmarketResolver(web3, instance.registry); 
           this.entities = await this.getAllEntities(); 
     }
     
@@ -31,6 +30,8 @@ class DMarketService {
     async getAllEntities(){
         // save all the entities in the DB 
         // let instance = await EthereumClient.getInstance(web3)
+
+        // 
         let result = await this.instance.getAllEntities(); 
         // for each entity, depending on what type it is- > store it as the respective type in mongoDB. 
         let entities = []; 

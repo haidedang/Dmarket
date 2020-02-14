@@ -1,10 +1,11 @@
 
 import EthereumClient from '../EthereumClient'
-
+import {bytes32toString, bytesToString, stringToBytes32} from '../entity';
 //const HttpProvider = require('ethjs-provider-http')
 const Web3 = require('web3');
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider);
+
 
 
 let Resolver;
@@ -22,7 +23,7 @@ describe('EthereumClient', () => {
         await instance.createDummyData();
     }) */
 
-    /* describe('register App', () => {
+    describe('register App', () => {
         let app;
         let history;
         let doc = {}
@@ -56,26 +57,28 @@ describe('EthereumClient', () => {
 
         it("should resolve the app correctly", async () => {
             let doc = await instance.resolveDID(app.address)
-            if (doc.dMarket.type = "app") {
-                let result = await ipfs.cat(doc.dMarket.data)
-                doc.dMarket = JSON.parse(result)
-            }
             expect(typeof (doc.dMarket)).toEqual('object')
             console.log(doc)
         })
-    }) */
+    })
 
     describe("getAllMarketplaceEntities",  () => {
         let apps = []
-        it("write attribute to the marketplace", async() => {
-             
+        it("fetch all entities", async() => {
             let result =  await instance.getAllEntities(); 
             for (let i = 0; i< result; i++){
               let result =  await instance.marketCore.getEntity(i); 
                apps.push(result)
             }
-            console.log(apps)
+           // console.log(apps)
         })
+
+        it("fetch all entities by Logs", async() => {
+            let result = await instance.getAllEntitiesByLogs(); 
+            console.log(result)
+            console.log(result.length)
+        })
+
 
         it("resolves all attributes correctly", async() => {
             let appObjects = []
@@ -87,7 +90,7 @@ describe('EthereumClient', () => {
                 } */
                 appObjects.push(doc);
             }
-            console.log(appObjects)
+          //  console.log(appObjects)
         })
     })
 
