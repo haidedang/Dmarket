@@ -31,7 +31,7 @@ export function bytes32toString (bytes32) {
     return Buffer.from(bytes32.slice(2), 'hex')
       .toString('utf8')
       .replace(/\0+$/, '')
-  }
+}
 
 export class DmarketResolver {
 

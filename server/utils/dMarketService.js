@@ -2,12 +2,10 @@
  *  dMarketService exposes an interface to the Dmarket Smart Contracts. 
  */
 
-import DMarketResolver from '../../resolver/dmarket-resolver';
 import EthereumClient from '../../src/js/EthereumClient';
-import DmarketResolver from '../../resolver/dmarket-resolver';
-const HttpProvider = require('ethjs-provider-http')
-let provider = new HttpProvider('http://localhost:8545')
-const Web3 = require('web3'); 
+
+const Web3 = require('web3');
+var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider);
 
 class DMarketService {

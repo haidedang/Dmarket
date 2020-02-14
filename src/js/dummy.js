@@ -59,7 +59,6 @@ class Dummy {
         this.web3 = await new Web3(provider);
         this.ethereumClient  = await EthereumClient.getInstance(this.web3);  
         accounts = await this.web3.eth.getAccounts(); 
-       // Resolver = new DmarketResolver(this.web3, this.ethereumClient.registry); 
 
         userA = accounts[0].toLowerCase();
         userB = accounts[1].toLowerCase();
