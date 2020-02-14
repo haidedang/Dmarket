@@ -16,10 +16,10 @@ module.exports = {
     },
     applicationSchema : [
         { name: 'author' , type: 'address'},  //fest
-        { name: 'appName', type: 'string'}, // fest 
+        { name: 'name', type: 'string'}, // fest 
         { name: 'description', type: 'string'},
         { name: 'downloadLink', type: 'string'},
-        { name: 'supportedApp', type: 'address[]'}
+        { name: 'Releases', type: 'address[]'}
     ],
     applicationVersionSchema: [],
     apiSchema: [],

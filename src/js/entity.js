@@ -136,7 +136,7 @@ export class App extends Entity {
         this.primaryType = "App",
         this.message = {
             author: author,
-            appName: appName,
+            name: appName,
             description: description,
             downloadLink: downloadLink,
             supportedApp: supportedApp
