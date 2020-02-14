@@ -3,10 +3,11 @@
 import { App, Entity, stringToBytes32 } from './entity'
 import { Resolver } from 'did-resolver';
 import ethr from 'ethr-did-resolver';
-const ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
-
 import { stringToBytes, bytesToString, bytes32toString } from './entity';
+import dummy from './dummy'; 
+import Dummy from './dummy';
 
+const ipfs = require("nano-ipfs-store").at("https://ipfs.infura.io:5001");
 const contract = require('truffle-contract')
 const MarketCore = require('../../build/contracts/MarketPlaceCore.json')
 const ERCRegistryContract = require('../../build/contracts/ERC1056.json')
@@ -76,12 +77,8 @@ class EthereumClient {
   }
 
   async createDummyData() {
-    let account = await this.getUserAccount()
-    let data = await this.marketCore.registerIdentity(account, account, { from: account, gas: 3000000 });
-    if (data != undefined) {
-      return true
-    }
-    return false;
+    let dummy = new Dummy(); 
+    await dummy.init(); 
   }
 
   // ------- ENTITY Marketplace Interface Methods ------------ 
@@ -101,6 +98,10 @@ class EthereumClient {
       toBlock: 'latest'
     })
     // now an identity has multiple attribute changed events. i will need the latest attribute of Apps and api. 
+    
+    // filter out those with distinct identities 
+    // filter out from those identities only did/dmarket. 
+
     return history
   }
 

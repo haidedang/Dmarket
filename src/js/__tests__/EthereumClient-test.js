@@ -19,9 +19,9 @@ describe('EthereumClient', () => {
         instance = await EthereumClient.getInstance(web3);
     })
 
-    /* it("should create Dummy Data", async () => {
+    it("should create Dummy Data", async () => {
         await instance.createDummyData();
-    }) */
+    })
 
     describe('register App', () => {
         let app;
@@ -75,6 +75,7 @@ describe('EthereumClient', () => {
 
         it("fetch all entities by Logs", async() => {
             let result = await instance.getAllEntitiesByLogs(); 
+
             console.log(result)
             console.log(result.length)
         })
