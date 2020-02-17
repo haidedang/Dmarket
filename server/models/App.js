@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const appSchema = new Schema({
-    appID: { type: 'String' },
+    id: { type: 'String' },
     author: { type: 'String' },
     name: {type: 'String'},
     description: {type: 'String'},

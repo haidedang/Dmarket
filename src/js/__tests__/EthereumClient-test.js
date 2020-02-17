@@ -1,6 +1,6 @@
 
 import EthereumClient from '../EthereumClient'
-import {bytes32toString, bytesToString, stringToBytes32} from '../entity';
+import {bytes32toString, bytesToString, stringToBytes32, Entity} from '../entity';
 //const HttpProvider = require('ethjs-provider-http')
 const Web3 = require('web3');
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
@@ -91,6 +91,43 @@ describe('EthereumClient', () => {
           //  console.log(appObjects)
         })
     })
+
+    describe('createOrganization', () => {
+        // Create Ethereum Key pair for organization 
+        let organization = new Entity(web3); 
+        organization.addDelegate(address); 
+        organization.setOwnerToMarketplace()
+
+        // Delegates of the organization with proper rights will be registered here! 
+    })
+
+    // Adde User zur Organization 
+
+    // who can set Delegates of the organization . specified in the custom smart contract. 
+
+
+    organization.addDelegate('address'); 
+    
+
+    // dieses Key pair is master key. übertrage die rights of organization to a smart contract. 
+    delegate.createApp (); 
+    // He would have to change ownership of App to the organization 
+
+    // Now only the holder of organization can set Attributes. 
+    
+    // organization has to nominate another owner in order to let them write. 
+
+    // creating an organization therefore costs gas. 
+
+    // Creating apps as an organization also costs more gas. 
+
+    // change ownership to marketplace. 
+
+    // set the owner of application there to the ones you need. 
+
+    
+
+
 
 })
 

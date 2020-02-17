@@ -22,8 +22,18 @@ module.exports = {
         { name: 'downloadLink', type: 'string'},
         { name: 'appReleases', type: 'address[]'}
     ],
-    applicationVersionSchema: [],
-    apiSchema: [],
+    applicationVersionSchema: [
+        {name: 'id', type: 'address'},
+        {name: 'name', type: 'string'}, 
+        {name: 'appID', type: 'address'},
+        {name: 'author', type: 'address'},
+        {name: 'releaseNote', type: 'string'},
+        {name: 'downloadLink', type: 'string'},
+        {name: 'supportedApi', type: 'address[]'}
+    ],
+    apiSchema: [
+        
+    ],
     apiVersionSchema: [],
     organizationSchema: []
 }

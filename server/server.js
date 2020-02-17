@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const config = require('./utils/config'); 
 import DMarketService from './utils/dMarketService';
+import App from './routes/app.routes'; 
 
 let server = require('http').createServer(app);
 let dMarket = new DMarketService(); 
@@ -18,16 +19,13 @@ mongoose.connect(config.mongoURL, error => {
 
 mongoose.set('debug', true);
 
+app.use('/api', App); 
+
 server.listen(config.port, async function () {
     console.log(`Server started on port ${config.port}`)
     // create Dummy Data on the Blockchain, several Dummy Apps and Apis. 
 
     await dMarket.init();
-    /* await dMarket.createDummyData(); */
-   
-   //let result =  await dMarket.loadAllEntities(); 
-   // console.log(result)
-   
-  //  await dMarket.getAllApps();
+    
 })
 

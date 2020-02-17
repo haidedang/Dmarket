@@ -3,8 +3,9 @@
  */
 
 import EthereumClient from '../../src/js/EthereumClient';
-import { App } from '../../src/js/entity';
-import AppDB from '../models/App'; 
+import * as AppController from '../controllers/app.controller'; 
+import App from '../models/App';
+
  
 const Web3 = require('web3');
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
@@ -39,27 +40,29 @@ class DMarketService {
         for(let i = 0; i< result.length; i++) {
             await this.saveEntityToDB(result[i]); 
         }
-        // for each entity, depending on what type it is-> store it as the respective type in mongoDB. 
-       
-        // return saveEntityToDB(result);
         
+    }
+
+    // this should listen for new DMARKET events and save them accordingly on the blockchain so it gets easy to query! 
+    // No costs to use AT ALL! NICEEEEE 
+    async syncEntities(){
+
     }
 
     async saveEntityToDB(entityAddress){
         
             // resolve the entity 
             let entity = await this.instance.resolveDID(entityAddress);
+
             const type = entity.dMarket.primaryType; 
             switch(type) {
                 case 'App': 
                     //save entity to DB 
-                    const app = new AppDB(entity.dMarket.message);
-                    app.save((err,saved) => {
-                        if(err) {
-                            console.log(err)
-                        }
-                    })
-                    console.log('app saved', app)
+                    AppController.addApp(entity.dMarket.message);
+                case 'Api':
+                    ApiController.addApi(entity.dMarket.message); 
+                case 'AppRelease':
+                case 'ApiRelease':
             }
         
         // return entities; 
