@@ -16,9 +16,23 @@ import App from '../models/App';
         })
  }
 
- export function getApp(req, res) {
+ // Get apps by UserId , usually we search for the author of the app. 
+// if am part of the organization, the owner will be the organization, but the user still is the author! 
+// The author of an app will always have rights to edit the app, but if he leaves the organization 
+// then though he is the author he will loose the rights to edit this app. 
+//that means if he is the author but not the owner, then he has to be a valid Delegate of the owner of entity 
+// to be able to edit those apps. 
 
- }
+/*  export function getAppsByUserId(req, res) {
+    App.find( {userId: req.params.userId})
+     .exec((err, App) => {
+         if(err) {
+             res.status(500)
+                .send(err)
+         }
+     })
+     res.json({app: App})
+ } */
 
 /**
  * 
