@@ -193,7 +193,7 @@ contract('MarketCore', function (accounts) {
           // Fetch all entities, look up the data in the event log
         })
         it("should update entity", async() => {
-          let value = await marketCore._updateEntity2(appAccount.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from('changed').toString("hex"),22000, {from: account}); 
+          let value = await marketCore.setData(appAccount.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from('changed').toString("hex"),22000, {from: account}); 
           //console.log(value)
         })
       })

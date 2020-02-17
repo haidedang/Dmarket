@@ -80,7 +80,7 @@ contract('MarketCore',  function (accounts) {
 
             it("should write meta DATA to the Marketplace", async () => {
                 let cid= "bafkreieo6ylu6mzz6ky62tfij4g5ktowlnp3xbk5nps6perr7rebrot2c4"
-                await marketCore._updateEntity2(entity.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from(cid).toString("hex"), 22000)
+                await marketCore.setData(entity.address, stringToBytes32('Dmarket'), '0x'+ Buffer.from(cid).toString("hex"), 22000)
             } ) 
 
             it("should create an ERC1056 DIDAttributeChanged event", async () => {

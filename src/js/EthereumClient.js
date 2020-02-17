@@ -124,13 +124,13 @@ class EthereumClient {
   }
 
   async setDataToMarketplace(entity) {
-    let result = await this.marketCore._updateEntity2(
+    let result = await this.marketCore.setData(
       entity.address, stringToBytes32('did/dMarket/app'), stringToBytes(entity.ipfsHash), 20000, { from: await self.getUserAccount(), gas: 300000 }
     )
   }
 
   async setAttribute(address, name, value, validity, sender) {
-    await this.marketCore._updateEntity2(address, name, value, validity, { from: sender, gas: 300000 });
+    await this.marketCore.setData(address, name, value, validity, { from: sender, gas: 300000 });
   }
 
   async resolveDID(address) {
