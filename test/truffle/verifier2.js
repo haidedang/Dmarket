@@ -1,6 +1,7 @@
 var MarketCore = artifacts.require("./MarketPlaceCore.sol");
 var Registry = artifacts.require("./ERC1056.sol");
 
+
 /* var Web3 = require('web3')
 var provider = new Web3.providers.HttpProvider("http://localhost:8545");
 let web3 = new Web3(provider);  */
@@ -56,10 +57,6 @@ contract('MarketCore',  function (accounts) {
         it("should create signed Entity", async() => {
             entity = new Entity(web3); 
             sigObj = await entity.setOwnerToMarketplace(registry, marketCore.address);
-        })
-
-        it("should show owner", async () => {
-            let result = await marketCore.showOwner.call(account); 
         })
 
         describe ("_updateEntity()", () => {

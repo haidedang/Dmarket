@@ -3709,10 +3709,92 @@
       "links": {},
       "address": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
       "transactionHash": "0xcd45bb2de60484ba8e3f989cf6fbedd6c05527969c3cae3ea18fb10346069fa2"
+    },
+    "1582012296665": {
+      "events": {},
+      "links": {},
+      "address": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
+      "transactionHash": "0xcd45bb2de60484ba8e3f989cf6fbedd6c05527969c3cae3ea18fb10346069fa2"
+    },
+    "1582026173327": {
+      "events": {
+        "0x7bc046ef9f2fccd4c99778d7e0fbed67ddb16e63e1a266894769de9516b8039a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "issuer",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "subject",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "removedAt",
+              "type": "uint256"
+            }
+          ],
+          "name": "ClaimRemoved",
+          "type": "event"
+        },
+        "0x8c9f893548e8429f9352aba6698e6f4dca2e390604f6e8c5881a7a505d94ae50": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "issuer",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "subject",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "value",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "updatedAt",
+              "type": "uint256"
+            }
+          ],
+          "name": "ClaimSet",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xDb56f2e9369E0D7bD191099125a3f6C370F8ed15",
+      "transactionHash": "0xbe5de9efa5bf7c94b237c5b57c42101afc85e6770fcb0572a9b03501f9eecd7f"
     }
   },
-  "schemaVersion": "3.0.11",
-  "updatedAt": "2020-02-17T13:48:27.283Z",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-18T11:49:25.505Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

@@ -10,6 +10,7 @@ contract MarketPlaceBase is Verifier {
     ClaimRegistryInterface claimRegistry;
 
     bytes32 public constant DELEGATE_ADMIN = keccak256(bytes("admin"));
+    bytes32 public constant DELEGATE_MEMBER = keccak256(bytes("member"));
 
     mapping(address => address) EntityOwner;
 
@@ -48,6 +49,10 @@ contract MarketPlaceBase is Verifier {
         public
     {
         registry.addDelegate(identity, memberType, member, 20000);
+    }
+
+    function revokeMember(address identity, bytes32 memberType, address member) public {
+      registry.revokeDelegate(identity, memberType, member);
     }
 
     function _deleteEntity() internal {}
