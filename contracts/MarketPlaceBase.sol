@@ -41,7 +41,6 @@ contract MarketPlaceBase is Verifier {
                 ) ||
                 registry.validDelegate(identity, DELEGATE_ADMIN, msg.sender)
         );
-
         registry.setAttribute(identity, name, value, validity);
     }
 
@@ -51,8 +50,10 @@ contract MarketPlaceBase is Verifier {
         registry.addDelegate(identity, memberType, member, 20000);
     }
 
-    function revokeMember(address identity, bytes32 memberType, address member) public {
-      registry.revokeDelegate(identity, memberType, member);
+    function revokeMember(address identity, bytes32 memberType, address member)
+        public
+    {
+        registry.revokeDelegate(identity, memberType, member);
     }
 
     function _deleteEntity() internal {}
