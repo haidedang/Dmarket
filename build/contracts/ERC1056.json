@@ -20757,10 +20757,116 @@
       "links": {},
       "address": "0x0E696947A06550DEf604e82C26fd9E493e576337",
       "transactionHash": "0x6456f4ad0748a099282f09c73af0dd5239f4a8dc263ff1aa2510159fdb9c5410"
+    },
+    "1582725624249": {
+      "events": {
+        "0x18ab6b2ae3d64306c00ce663125f2bd680e441a098de1635bd7ad8b0d44965e4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "identity",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "name",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes",
+              "name": "value",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "validTo",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "previousChange",
+              "type": "uint256"
+            }
+          ],
+          "name": "DIDAttributeChanged",
+          "type": "event"
+        },
+        "0x5a5084339536bcab65f20799fcc58724588145ca054bd2be626174b27ba156f7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "identity",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bytes32",
+              "name": "delegateType",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "delegate",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "validTo",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "previousChange",
+              "type": "uint256"
+            }
+          ],
+          "name": "DIDDelegateChanged",
+          "type": "event"
+        },
+        "0x38a5a6e68f30ed1ab45860a4afb34bcb2fc00f22ca462d249b8a8d40cda6f7a3": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "identity",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "previousChange",
+              "type": "uint256"
+            }
+          ],
+          "name": "DIDOwnerChanged",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
+      "transactionHash": "0x27126ff216f9e8a53754e9b01559eba622d3e68bab62d78b74455d031ec83c78"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-18T11:49:25.490Z",
+  "updatedAt": "2020-02-26T14:37:06.675Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

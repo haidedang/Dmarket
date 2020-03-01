@@ -18,7 +18,9 @@
     "testjest": "jest"
   },
   "dependencies": {
+    "autoprefixer": "^9.7.4",
     "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.1",
     "did-jwt": "^3.0.0",

@@ -47,6 +47,7 @@
 
 <script>
 import { mapState } from "vuex";
+import MetaMask from '../util/metamask' 
 
 export default {
   name: "navBar",
@@ -61,8 +62,10 @@ export default {
       this.$router.push('/')
     },
     login: async function() {
-      await this.$store.dispatch('fetchUser');
-      this.$router.push('/')
+      MetaMask.getWeb3().then(console.log)
+
+      /* await this.$store.dispatch('fetchUser');
+      this.$router.push('/') */
     }
   }
 };

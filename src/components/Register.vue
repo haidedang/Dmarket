@@ -22,7 +22,8 @@
 
 import userService from '@/services/userService';
 import EthereumClient from '@/js/EthereumClient';
-import getWeb3 from '@/util/getWeb3'
+/* import getWeb3 from '@/util/getWeb3'
+ */
 
 export default {
   name: "register",

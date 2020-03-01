@@ -1,0 +1,552 @@
+{
+  "contractName": "ERC721Metadata",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "_symbol",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "tokenURI",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md  Note: the ERC-165 identifier for this interface is 0x5b5e139f\",\"methods\":{\"tokenURI(uint256)\":{\"details\":\"Throws if `_tokenId` is not a valid NFT. URIs are defined in RFC  3986. The URI may point to a JSON file that conforms to the \\\"ERC721  Metadata JSON Schema\\\".\"}},\"title\":\"ERC-721 Non-Fungible Token Standard, optional metadata extension\"},\"userdoc\":{\"methods\":{\"name()\":{\"notice\":\"A descriptive name for a collection of NFTs in this contract\"},\"symbol()\":{\"notice\":\"An abbreviated name for NFTs in this contract\"},\"tokenURI(uint256)\":{\"notice\":\"A distinct Uniform Resource Identifier (URI) for a given asset.\"}}}},\"settings\":{\"compilationTarget\":{\"/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/interfaces/ERC721Metadata.sol\":\"ERC721Metadata\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/interfaces/ERC721Metadata.sol\":{\"keccak256\":\"0x39c9c36527d5e4b8d59d917b541469167121eb21b7dd5335fe6f40926df80cb4\",\"urls\":[\"bzz-raw://4a83623f2e83f9ef73f8d20f7fc52430acb6fe2f4c61a8b53097e155aae671a0\",\"dweb:/ipfs/QmdoAeUUmnCFoj2CqZfunEFg9KStAprxUKjJdMycnzR1W9\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.12;\n\n/// @title ERC-721 Non-Fungible Token Standard, optional metadata extension\n/// @dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md\n///  Note: the ERC-165 identifier for this interface is 0x5b5e139f\ninterface ERC721Metadata /* is ERC721 */ {\n    /// @notice A descriptive name for a collection of NFTs in this contract\n    function name() external pure returns (string memory _name);\n\n    /// @notice An abbreviated name for NFTs in this contract\n    function symbol() external pure returns (string memory _symbol);\n\n    /// @notice A distinct Uniform Resource Identifier (URI) for a given asset.\n    /// @dev Throws if `_tokenId` is not a valid NFT. URIs are defined in RFC\n    ///  3986. The URI may point to a JSON file that conforms to the \"ERC721\n    ///  Metadata JSON Schema\".\n    function tokenURI(uint256 _tokenId) external view returns (string memory);\n}\n",
+  "sourcePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/interfaces/ERC721Metadata.sol",
+  "ast": {
+    "absolutePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/interfaces/ERC721Metadata.sol",
+    "exportedSymbols": {
+      "ERC721Metadata": [
+        1746
+      ]
+    },
+    "id": 1747,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1728,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title ERC-721 Non-Fungible Token Standard, optional metadata extension\n @dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md\n  Note: the ERC-165 identifier for this interface is 0x5b5e139f",
+        "fullyImplemented": false,
+        "id": 1746,
+        "linearizedBaseContracts": [
+          1746
+        ],
+        "name": "ERC721Metadata",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@notice A descriptive name for a collection of NFTs in this contract",
+            "id": 1733,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "name",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1729,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "380:2:11"
+            },
+            "returnParameters": {
+              "id": 1732,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1731,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1733,
+                  "src": "406:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1730,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "406:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "405:21:11"
+            },
+            "scope": 1746,
+            "src": "367:60:11",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice An abbreviated name for NFTs in this contract",
+            "id": 1738,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "symbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1734,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "510:2:11"
+            },
+            "returnParameters": {
+              "id": 1737,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1736,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1738,
+                  "src": "536:21:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1735,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "536:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "535:23:11"
+            },
+            "scope": 1746,
+            "src": "495:64:11",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice A distinct Uniform Resource Identifier (URI) for a given asset.\n @dev Throws if `_tokenId` is not a valid NFT. URIs are defined in RFC\n  3986. The URI may point to a JSON file that conforms to the \"ERC721\n  Metadata JSON Schema\".",
+            "id": 1745,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "tokenURI",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1741,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1740,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1745,
+                  "src": "850:16:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1739,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "850:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "849:18:11"
+            },
+            "returnParameters": {
+              "id": 1744,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1743,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1745,
+                  "src": "891:13:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1742,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "891:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "890:15:11"
+            },
+            "scope": 1746,
+            "src": "832:74:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1747,
+        "src": "243:665:11"
+      }
+    ],
+    "src": "0:909:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/interfaces/ERC721Metadata.sol",
+    "exportedSymbols": {
+      "ERC721Metadata": [
+        1746
+      ]
+    },
+    "id": 1747,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1728,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title ERC-721 Non-Fungible Token Standard, optional metadata extension\n @dev See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md\n  Note: the ERC-165 identifier for this interface is 0x5b5e139f",
+        "fullyImplemented": false,
+        "id": 1746,
+        "linearizedBaseContracts": [
+          1746
+        ],
+        "name": "ERC721Metadata",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@notice A descriptive name for a collection of NFTs in this contract",
+            "id": 1733,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "name",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1729,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "380:2:11"
+            },
+            "returnParameters": {
+              "id": 1732,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1731,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1733,
+                  "src": "406:19:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1730,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "406:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "405:21:11"
+            },
+            "scope": 1746,
+            "src": "367:60:11",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice An abbreviated name for NFTs in this contract",
+            "id": 1738,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "symbol",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1734,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "510:2:11"
+            },
+            "returnParameters": {
+              "id": 1737,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1736,
+                  "name": "_symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1738,
+                  "src": "536:21:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1735,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "536:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "535:23:11"
+            },
+            "scope": 1746,
+            "src": "495:64:11",
+            "stateMutability": "pure",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": "@notice A distinct Uniform Resource Identifier (URI) for a given asset.\n @dev Throws if `_tokenId` is not a valid NFT. URIs are defined in RFC\n  3986. The URI may point to a JSON file that conforms to the \"ERC721\n  Metadata JSON Schema\".",
+            "id": 1745,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "tokenURI",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1741,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1740,
+                  "name": "_tokenId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1745,
+                  "src": "850:16:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1739,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "850:7:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "849:18:11"
+            },
+            "returnParameters": {
+              "id": 1744,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1743,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1745,
+                  "src": "891:13:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1742,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "891:6:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "890:15:11"
+            },
+            "scope": 1746,
+            "src": "832:74:11",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1747,
+        "src": "243:665:11"
+      }
+    ],
+    "src": "0:909:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.12+commit.7709ece9.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-26T14:37:01.656Z",
+  "devdoc": {
+    "details": "See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md  Note: the ERC-165 identifier for this interface is 0x5b5e139f",
+    "methods": {
+      "tokenURI(uint256)": {
+        "details": "Throws if `_tokenId` is not a valid NFT. URIs are defined in RFC  3986. The URI may point to a JSON file that conforms to the \"ERC721  Metadata JSON Schema\"."
+      }
+    },
+    "title": "ERC-721 Non-Fungible Token Standard, optional metadata extension"
+  },
+  "userdoc": {
+    "methods": {
+      "name()": {
+        "notice": "A descriptive name for a collection of NFTs in this contract"
+      },
+      "symbol()": {
+        "notice": "An abbreviated name for NFTs in this contract"
+      },
+      "tokenURI(uint256)": {
+        "notice": "A distinct Uniform Resource Identifier (URI) for a given asset."
+      }
+    }
+  }
+}

@@ -1,0 +1,3697 @@
+{
+  "contractName": "LicenseBase",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "purchaser",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "licenseId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attributes",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "issuedTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "expirationTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseIssued",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "purchaser",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "licenseId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "expirationTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "LicenseRenewal",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_licenseId",
+          "type": "uint256"
+        }
+      ],
+      "name": "licenseProductId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_licenseId",
+          "type": "uint256"
+        }
+      ],
+      "name": "licenseAttributes",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_licenseId",
+          "type": "uint256"
+        }
+      ],
+      "name": "licenseIssuedTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_licenseId",
+          "type": "uint256"
+        }
+      ],
+      "name": "licenseExpirationTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_licenseId",
+          "type": "uint256"
+        }
+      ],
+      "name": "licenseInfo",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"purchaser\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"licenseId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"productId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"attributes\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"issuedTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationTime\",\"type\":\"uint256\"}],\"name\":\"LicenseIssued\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"purchaser\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"licenseId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"productId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expirationTime\",\"type\":\"uint256\"}],\"name\":\"LicenseRenewal\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_licenseId\",\"type\":\"uint256\"}],\"name\":\"licenseAttributes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_licenseId\",\"type\":\"uint256\"}],\"name\":\"licenseExpirationTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_licenseId\",\"type\":\"uint256\"}],\"name\":\"licenseInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_licenseId\",\"type\":\"uint256\"}],\"name\":\"licenseIssuedTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_licenseId\",\"type\":\"uint256\"}],\"name\":\"licenseProductId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"licenseAttributes(uint256)\":{\"params\":{\"_licenseId\":\"the license id\"}},\"licenseExpirationTime(uint256)\":{\"params\":{\"_licenseId\":\"the license id\"}},\"licenseInfo(uint256)\":{\"params\":{\"_licenseId\":\"the license id\"}},\"licenseIssuedTime(uint256)\":{\"params\":{\"_licenseId\":\"the license id\"}},\"licenseProductId(uint256)\":{\"params\":{\"_licenseId\":\"the license id\"}}},\"title\":\"LicenseBase\"},\"userdoc\":{\"methods\":{\"licenseAttributes(uint256)\":{\"notice\":\"Get a license's attributes\"},\"licenseExpirationTime(uint256)\":{\"notice\":\"Get a license's issueTime\"},\"licenseInfo(uint256)\":{\"notice\":\"Get a license's info\"},\"licenseIssuedTime(uint256)\":{\"notice\":\"Get a license's issueTime\"},\"licenseProductId(uint256)\":{\"notice\":\"Get a license's productId\"}},\"notice\":\"This contract defines the License data structure and how to read from it\"}},\"settings\":{\"compilationTarget\":{\"/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/LicenseBase.sol\":\"LicenseBase\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/LicenseBase.sol\":{\"keccak256\":\"0x63ec0abe63a3906bc88c1862cf64edd50998fca97bab54f33d254c4f6bdec1c3\",\"urls\":[\"bzz-raw://05900c4badc595de88c385471ec2bb65f61708a7e080aa55dd87a81ca5f2203a\",\"dweb:/ipfs/QmYjUtvjiM3vbBiaLCeLG4XKmzgARdmroEGjvGbmhGBtNS\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506102c5806100206000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c80631411d7131461005c5780631e0845581461009e5780639425753c146100f5578063dfbebd0714610137578063f4b272db14610179575b600080fd5b6100886004803603602081101561007257600080fd5b81019080803590602001909291905050506101bb565b6040518082815260200191505060405180910390f35b6100ca600480360360208110156100b457600080fd5b81019080803590602001909291905050506101e2565b6040518085815260200184815260200183815260200182815260200194505050505060405180910390f35b6101216004803603602081101561010b57600080fd5b810190808035906020019092919050505061021b565b6040518082815260200191505060405180910390f35b6101636004803603602081101561014d57600080fd5b8101908080359060200190929190505050610242565b6040518082815260200191505060405180910390f35b6101a56004803603602081101561018f57600080fd5b8101908080359060200190929190505050610269565b6040518082815260200191505060405180910390f35b60008082815481106101c957fe5b9060005260206000209060040201600201549050919050565b6000806000806101f18561021b565b6101fa86610269565b610203876101bb565b61020c88610242565b93509350935093509193509193565b600080828154811061022957fe5b9060005260206000209060040201600001549050919050565b600080828154811061025057fe5b9060005260206000209060040201600301549050919050565b600080828154811061027757fe5b906000526020600020906004020160010154905091905056fea265627a7a723158204726d977805fb944fc4dbfa7dde28c6c6fe3fed8f362845628f47d9184e8a5dd64736f6c634300050c0032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100575760003560e01c80631411d7131461005c5780631e0845581461009e5780639425753c146100f5578063dfbebd0714610137578063f4b272db14610179575b600080fd5b6100886004803603602081101561007257600080fd5b81019080803590602001909291905050506101bb565b6040518082815260200191505060405180910390f35b6100ca600480360360208110156100b457600080fd5b81019080803590602001909291905050506101e2565b6040518085815260200184815260200183815260200182815260200194505050505060405180910390f35b6101216004803603602081101561010b57600080fd5b810190808035906020019092919050505061021b565b6040518082815260200191505060405180910390f35b6101636004803603602081101561014d57600080fd5b8101908080359060200190929190505050610242565b6040518082815260200191505060405180910390f35b6101a56004803603602081101561018f57600080fd5b8101908080359060200190929190505050610269565b6040518082815260200191505060405180910390f35b60008082815481106101c957fe5b9060005260206000209060040201600201549050919050565b6000806000806101f18561021b565b6101fa86610269565b610203876101bb565b61020c88610242565b93509350935093509193509193565b600080828154811061022957fe5b9060005260206000209060040201600001549050919050565b600080828154811061025057fe5b9060005260206000209060040201600301549050919050565b600080828154811061027757fe5b906000526020600020906004020160010154905091905056fea265627a7a723158204726d977805fb944fc4dbfa7dde28c6c6fe3fed8f362845628f47d9184e8a5dd64736f6c634300050c0032",
+  "sourceMap": "141:2425:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;141:2425:5;;;;;;;",
+  "deployedSourceMap": "141:2425:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;141:2425:5;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1711:160;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1711:160:5;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2228:335;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;2228:335:5;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1198:158;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1198:158:5;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1968:168;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1968:168:5;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1454:160;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1454:160:5;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1711;1803:7;1833:8;1842:10;1833:20;;;;;;;;;;;;;;;;;;:31;;;1826:38;;1711:160;;;:::o;2228:335::-;2314:7;2323;2332;2341;2385:28;2402:10;2385:16;:28::i;:::-;2427:29;2445:10;2427:17;:29::i;:::-;2470;2488:10;2470:17;:29::i;:::-;2513:33;2535:10;2513:21;:33::i;:::-;2364:192;;;;;;;;2228:335;;;;;:::o;1198:158::-;1289:7;1319:8;1328:10;1319:20;;;;;;;;;;;;;;;;;;:30;;;1312:37;;1198:158;;;:::o;1968:168::-;2064:7;2094:8;2103:10;2094:20;;;;;;;;;;;;;;;;;;:35;;;2087:42;;1968:168;;;:::o;1454:160::-;1546:7;1576:8;1585:10;1576:20;;;;;;;;;;;;;;;;;;:31;;;1569:38;;1454:160;;;:::o",
+  "source": "pragma solidity ^0.5.12;\n\n/**\n * @title LicenseBase\n * @notice This contract defines the License data structure and how to read from it\n */\n\ncontract LicenseBase {\n    /**\n   * @notice Issued is emitted when a new license is issued\n   */\n    event LicenseIssued(\n        address indexed owner,\n        address indexed purchaser,\n        uint256 licenseId,\n        uint256 productId,\n        uint256 attributes,\n        uint256 issuedTime,\n        uint256 expirationTime\n    );\n\n    event LicenseRenewal(\n        address indexed owner,\n        address indexed purchaser,\n        uint256 licenseId,\n        uint256 productId,\n        uint256 expirationTime\n    );\n\n    struct License {\n        uint256 productId;\n        uint256 attributes;\n        uint256 issuedTime;\n        uint256 expirationTime;\n    }\n\n    /**\n   * @notice All licenses in existence.\n   * @dev The ID of each license is an index in this array.\n   */\n    License[] licenses;\n\n    /** internal **/\n    function _isValidLicense(uint256 _licenseId) internal view returns (bool) {\n        return licenseProductId(_licenseId) != 0;\n    }\n\n    /**\n   * @notice Get a license's productId\n   * @param _licenseId the license id\n   */\n    function licenseProductId(uint256 _licenseId)\n        public\n        view\n        returns (uint256)\n    {\n        return licenses[_licenseId].productId;\n    }\n\n    /**\n   * @notice Get a license's attributes\n   * @param _licenseId the license id\n   */\n    function licenseAttributes(uint256 _licenseId)\n        public\n        view\n        returns (uint256)\n    {\n        return licenses[_licenseId].attributes;\n    }\n\n    /**\n   * @notice Get a license's issueTime\n   * @param _licenseId the license id\n   */\n    function licenseIssuedTime(uint256 _licenseId)\n        public\n        view\n        returns (uint256)\n    {\n        return licenses[_licenseId].issuedTime;\n    }\n\n    /**\n   * @notice Get a license's issueTime\n   * @param _licenseId the license id\n   */\n    function licenseExpirationTime(uint256 _licenseId)\n        public\n        view\n        returns (uint256)\n    {\n        return licenses[_licenseId].expirationTime;\n    }\n\n    /**\n   * @notice Get a license's info\n   * @param _licenseId the license id\n   */\n    function licenseInfo(uint256 _licenseId)\n        public\n        view\n        returns (uint256, uint256, uint256, uint256)\n    {\n        return (\n            licenseProductId(_licenseId),\n            licenseAttributes(_licenseId),\n            licenseIssuedTime(_licenseId),\n            licenseExpirationTime(_licenseId)\n        );\n    }\n\n}\n",
+  "sourcePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/LicenseBase.sol",
+  "ast": {
+    "absolutePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/LicenseBase.sol",
+    "exportedSymbols": {
+      "LicenseBase": [
+        1389
+      ]
+    },
+    "id": 1390,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1254,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title LicenseBase\n@notice This contract defines the License data structure and how to read from it",
+        "fullyImplemented": true,
+        "id": 1389,
+        "linearizedBaseContracts": [
+          1389
+        ],
+        "name": "LicenseBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@notice Issued is emitted when a new license is issued",
+            "id": 1270,
+            "name": "LicenseIssued",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1269,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1256,
+                  "indexed": true,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "271:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1255,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "271:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1258,
+                  "indexed": true,
+                  "name": "purchaser",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "302:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1257,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "302:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1260,
+                  "indexed": false,
+                  "name": "licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "337:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1259,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "337:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1262,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "364:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1261,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "364:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1264,
+                  "indexed": false,
+                  "name": "attributes",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "391:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1263,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "391:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1266,
+                  "indexed": false,
+                  "name": "issuedTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "419:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1265,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "419:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1268,
+                  "indexed": false,
+                  "name": "expirationTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "447:22:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1267,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "447:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "261:214:5"
+            },
+            "src": "242:234:5"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1282,
+            "name": "LicenseRenewal",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1281,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1272,
+                  "indexed": true,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "512:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1271,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "512:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1274,
+                  "indexed": true,
+                  "name": "purchaser",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "543:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1273,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "543:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1276,
+                  "indexed": false,
+                  "name": "licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "578:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1275,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "578:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1278,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "605:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1277,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "605:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1280,
+                  "indexed": false,
+                  "name": "expirationTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "632:22:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1279,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "632:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "502:158:5"
+            },
+            "src": "482:179:5"
+          },
+          {
+            "canonicalName": "LicenseBase.License",
+            "id": 1291,
+            "members": [
+              {
+                "constant": false,
+                "id": 1284,
+                "name": "productId",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "692:17:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1283,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "692:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1286,
+                "name": "attributes",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "719:18:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1285,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "719:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1288,
+                "name": "issuedTime",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "747:18:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1287,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "747:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1290,
+                "name": "expirationTime",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "775:22:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1289,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "775:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "License",
+            "nodeType": "StructDefinition",
+            "scope": 1389,
+            "src": "667:137:5",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1294,
+            "name": "licenses",
+            "nodeType": "VariableDeclaration",
+            "scope": 1389,
+            "src": "924:18:5",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+              "typeString": "struct LicenseBase.License[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 1292,
+                "name": "License",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1291,
+                "src": "924:7:5",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_License_$1291_storage_ptr",
+                  "typeString": "struct LicenseBase.License"
+                }
+              },
+              "id": 1293,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "924:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage_ptr",
+                "typeString": "struct LicenseBase.License[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1307,
+              "nodeType": "Block",
+              "src": "1044:57:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 1305,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 1302,
+                          "name": "_licenseId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1296,
+                          "src": "1078:10:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 1301,
+                        "name": "licenseProductId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1321,
+                        "src": "1061:16:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                          "typeString": "function (uint256) view returns (uint256)"
+                        }
+                      },
+                      "id": 1303,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1061:28:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "hexValue": "30",
+                      "id": 1304,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1093:1:5",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1061:33:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1300,
+                  "id": 1306,
+                  "nodeType": "Return",
+                  "src": "1054:40:5"
+                }
+              ]
+            },
+            "documentation": "internal *",
+            "id": 1308,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_isValidLicense",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1297,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1296,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1308,
+                  "src": "995:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1295,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "995:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "994:20:5"
+            },
+            "returnParameters": {
+              "id": 1300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1299,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1308,
+                  "src": "1038:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1298,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1038:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1037:6:5"
+            },
+            "scope": 1389,
+            "src": "970:131:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1320,
+              "nodeType": "Block",
+              "src": "1302:54:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1315,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1319:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1317,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1316,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1310,
+                        "src": "1328:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1319:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1318,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "productId",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1284,
+                    "src": "1319:30:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1314,
+                  "id": 1319,
+                  "nodeType": "Return",
+                  "src": "1312:37:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's productId\n@param _licenseId the license id",
+            "id": 1321,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseProductId",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1311,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1310,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1321,
+                  "src": "1224:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1309,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1224:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1223:20:5"
+            },
+            "returnParameters": {
+              "id": 1314,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1313,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1321,
+                  "src": "1289:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1312,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1289:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1288:9:5"
+            },
+            "scope": 1389,
+            "src": "1198:158:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1333,
+              "nodeType": "Block",
+              "src": "1559:55:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1328,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1576:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1330,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1329,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1323,
+                        "src": "1585:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1576:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1331,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "attributes",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1286,
+                    "src": "1576:31:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1327,
+                  "id": 1332,
+                  "nodeType": "Return",
+                  "src": "1569:38:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's attributes\n@param _licenseId the license id",
+            "id": 1334,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseAttributes",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1324,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1323,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1334,
+                  "src": "1481:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1322,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1481:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1480:20:5"
+            },
+            "returnParameters": {
+              "id": 1327,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1326,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1334,
+                  "src": "1546:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1325,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1546:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1545:9:5"
+            },
+            "scope": 1389,
+            "src": "1454:160:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1346,
+              "nodeType": "Block",
+              "src": "1816:55:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1341,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1833:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1343,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1342,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1336,
+                        "src": "1842:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1833:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1344,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "issuedTime",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1288,
+                    "src": "1833:31:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1340,
+                  "id": 1345,
+                  "nodeType": "Return",
+                  "src": "1826:38:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's issueTime\n@param _licenseId the license id",
+            "id": 1347,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseIssuedTime",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1337,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1336,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1347,
+                  "src": "1738:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1335,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1738:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1737:20:5"
+            },
+            "returnParameters": {
+              "id": 1340,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1339,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1347,
+                  "src": "1803:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1338,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1803:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1802:9:5"
+            },
+            "scope": 1389,
+            "src": "1711:160:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1359,
+              "nodeType": "Block",
+              "src": "2077:59:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1354,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "2094:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1356,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1355,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1349,
+                        "src": "2103:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2094:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1357,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "expirationTime",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1290,
+                    "src": "2094:35:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1353,
+                  "id": 1358,
+                  "nodeType": "Return",
+                  "src": "2087:42:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's issueTime\n@param _licenseId the license id",
+            "id": 1360,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseExpirationTime",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1349,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1360,
+                  "src": "1999:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1348,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1999:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1998:20:5"
+            },
+            "returnParameters": {
+              "id": 1353,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1352,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1360,
+                  "src": "2064:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1351,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2064:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2063:9:5"
+            },
+            "scope": 1389,
+            "src": "1968:168:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1387,
+              "nodeType": "Block",
+              "src": "2354:209:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1374,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2402:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1373,
+                          "name": "licenseProductId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1321,
+                          "src": "2385:16:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1375,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2385:28:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1377,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2445:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1376,
+                          "name": "licenseAttributes",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1334,
+                          "src": "2427:17:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1378,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2427:29:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1380,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2488:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1379,
+                          "name": "licenseIssuedTime",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1347,
+                          "src": "2470:17:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1381,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2470:29:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1383,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2535:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1382,
+                          "name": "licenseExpirationTime",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1360,
+                          "src": "2513:21:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1384,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2513:33:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "id": 1385,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "2371:185:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$",
+                      "typeString": "tuple(uint256,uint256,uint256,uint256)"
+                    }
+                  },
+                  "functionReturnParameters": 1372,
+                  "id": 1386,
+                  "nodeType": "Return",
+                  "src": "2364:192:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's info\n@param _licenseId the license id",
+            "id": 1388,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1363,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1362,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2249:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1361,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2249:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2248:20:5"
+            },
+            "returnParameters": {
+              "id": 1372,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1365,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2314:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1364,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2314:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1367,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2323:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1366,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2323:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1369,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2332:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1368,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2332:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1371,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2341:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1370,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2341:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2313:36:5"
+            },
+            "scope": 1389,
+            "src": "2228:335:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1390,
+        "src": "141:2425:5"
+      }
+    ],
+    "src": "0:2567:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/Hai/Google Drive/KMS/01. Work/121. Vue/Vue_Truffle/contracts/LicenseBase.sol",
+    "exportedSymbols": {
+      "LicenseBase": [
+        1389
+      ]
+    },
+    "id": 1390,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1254,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title LicenseBase\n@notice This contract defines the License data structure and how to read from it",
+        "fullyImplemented": true,
+        "id": 1389,
+        "linearizedBaseContracts": [
+          1389
+        ],
+        "name": "LicenseBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": "@notice Issued is emitted when a new license is issued",
+            "id": 1270,
+            "name": "LicenseIssued",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1269,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1256,
+                  "indexed": true,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "271:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1255,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "271:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1258,
+                  "indexed": true,
+                  "name": "purchaser",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "302:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1257,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "302:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1260,
+                  "indexed": false,
+                  "name": "licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "337:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1259,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "337:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1262,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "364:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1261,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "364:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1264,
+                  "indexed": false,
+                  "name": "attributes",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "391:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1263,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "391:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1266,
+                  "indexed": false,
+                  "name": "issuedTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "419:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1265,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "419:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1268,
+                  "indexed": false,
+                  "name": "expirationTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1270,
+                  "src": "447:22:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1267,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "447:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "261:214:5"
+            },
+            "src": "242:234:5"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1282,
+            "name": "LicenseRenewal",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1281,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1272,
+                  "indexed": true,
+                  "name": "owner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "512:21:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1271,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "512:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1274,
+                  "indexed": true,
+                  "name": "purchaser",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "543:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1273,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "543:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1276,
+                  "indexed": false,
+                  "name": "licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "578:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1275,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "578:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1278,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "605:17:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1277,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "605:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1280,
+                  "indexed": false,
+                  "name": "expirationTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1282,
+                  "src": "632:22:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1279,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "632:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "502:158:5"
+            },
+            "src": "482:179:5"
+          },
+          {
+            "canonicalName": "LicenseBase.License",
+            "id": 1291,
+            "members": [
+              {
+                "constant": false,
+                "id": 1284,
+                "name": "productId",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "692:17:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1283,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "692:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1286,
+                "name": "attributes",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "719:18:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1285,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "719:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1288,
+                "name": "issuedTime",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "747:18:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1287,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "747:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1290,
+                "name": "expirationTime",
+                "nodeType": "VariableDeclaration",
+                "scope": 1291,
+                "src": "775:22:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1289,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "775:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "License",
+            "nodeType": "StructDefinition",
+            "scope": 1389,
+            "src": "667:137:5",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1294,
+            "name": "licenses",
+            "nodeType": "VariableDeclaration",
+            "scope": 1389,
+            "src": "924:18:5",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+              "typeString": "struct LicenseBase.License[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 1292,
+                "name": "License",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1291,
+                "src": "924:7:5",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_License_$1291_storage_ptr",
+                  "typeString": "struct LicenseBase.License"
+                }
+              },
+              "id": 1293,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "924:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage_ptr",
+                "typeString": "struct LicenseBase.License[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1307,
+              "nodeType": "Block",
+              "src": "1044:57:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 1305,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 1302,
+                          "name": "_licenseId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1296,
+                          "src": "1078:10:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 1301,
+                        "name": "licenseProductId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1321,
+                        "src": "1061:16:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                          "typeString": "function (uint256) view returns (uint256)"
+                        }
+                      },
+                      "id": 1303,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1061:28:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "!=",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "hexValue": "30",
+                      "id": 1304,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1093:1:5",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1061:33:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1300,
+                  "id": 1306,
+                  "nodeType": "Return",
+                  "src": "1054:40:5"
+                }
+              ]
+            },
+            "documentation": "internal *",
+            "id": 1308,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_isValidLicense",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1297,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1296,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1308,
+                  "src": "995:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1295,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "995:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "994:20:5"
+            },
+            "returnParameters": {
+              "id": 1300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1299,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1308,
+                  "src": "1038:4:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1298,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1038:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1037:6:5"
+            },
+            "scope": 1389,
+            "src": "970:131:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1320,
+              "nodeType": "Block",
+              "src": "1302:54:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1315,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1319:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1317,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1316,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1310,
+                        "src": "1328:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1319:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1318,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "productId",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1284,
+                    "src": "1319:30:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1314,
+                  "id": 1319,
+                  "nodeType": "Return",
+                  "src": "1312:37:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's productId\n@param _licenseId the license id",
+            "id": 1321,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseProductId",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1311,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1310,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1321,
+                  "src": "1224:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1309,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1224:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1223:20:5"
+            },
+            "returnParameters": {
+              "id": 1314,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1313,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1321,
+                  "src": "1289:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1312,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1289:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1288:9:5"
+            },
+            "scope": 1389,
+            "src": "1198:158:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1333,
+              "nodeType": "Block",
+              "src": "1559:55:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1328,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1576:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1330,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1329,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1323,
+                        "src": "1585:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1576:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1331,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "attributes",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1286,
+                    "src": "1576:31:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1327,
+                  "id": 1332,
+                  "nodeType": "Return",
+                  "src": "1569:38:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's attributes\n@param _licenseId the license id",
+            "id": 1334,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseAttributes",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1324,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1323,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1334,
+                  "src": "1481:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1322,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1481:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1480:20:5"
+            },
+            "returnParameters": {
+              "id": 1327,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1326,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1334,
+                  "src": "1546:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1325,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1546:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1545:9:5"
+            },
+            "scope": 1389,
+            "src": "1454:160:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1346,
+              "nodeType": "Block",
+              "src": "1816:55:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1341,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "1833:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1343,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1342,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1336,
+                        "src": "1842:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1833:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1344,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "issuedTime",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1288,
+                    "src": "1833:31:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1340,
+                  "id": 1345,
+                  "nodeType": "Return",
+                  "src": "1826:38:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's issueTime\n@param _licenseId the license id",
+            "id": 1347,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseIssuedTime",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1337,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1336,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1347,
+                  "src": "1738:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1335,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1738:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1737:20:5"
+            },
+            "returnParameters": {
+              "id": 1340,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1339,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1347,
+                  "src": "1803:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1338,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1803:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1802:9:5"
+            },
+            "scope": 1389,
+            "src": "1711:160:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1359,
+              "nodeType": "Block",
+              "src": "2077:59:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1354,
+                        "name": "licenses",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1294,
+                        "src": "2094:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_License_$1291_storage_$dyn_storage",
+                          "typeString": "struct LicenseBase.License storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1356,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1355,
+                        "name": "_licenseId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1349,
+                        "src": "2103:10:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2094:20:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_License_$1291_storage",
+                        "typeString": "struct LicenseBase.License storage ref"
+                      }
+                    },
+                    "id": 1357,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "expirationTime",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 1290,
+                    "src": "2094:35:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 1353,
+                  "id": 1358,
+                  "nodeType": "Return",
+                  "src": "2087:42:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's issueTime\n@param _licenseId the license id",
+            "id": 1360,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseExpirationTime",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1349,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1360,
+                  "src": "1999:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1348,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1999:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1998:20:5"
+            },
+            "returnParameters": {
+              "id": 1353,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1352,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1360,
+                  "src": "2064:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1351,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2064:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2063:9:5"
+            },
+            "scope": 1389,
+            "src": "1968:168:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1387,
+              "nodeType": "Block",
+              "src": "2354:209:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1374,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2402:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1373,
+                          "name": "licenseProductId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1321,
+                          "src": "2385:16:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1375,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2385:28:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1377,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2445:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1376,
+                          "name": "licenseAttributes",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1334,
+                          "src": "2427:17:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1378,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2427:29:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1380,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2488:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1379,
+                          "name": "licenseIssuedTime",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1347,
+                          "src": "2470:17:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1381,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2470:29:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1383,
+                            "name": "_licenseId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1362,
+                            "src": "2535:10:5",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "id": 1382,
+                          "name": "licenseExpirationTime",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1360,
+                          "src": "2513:21:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_uint256_$",
+                            "typeString": "function (uint256) view returns (uint256)"
+                          }
+                        },
+                        "id": 1384,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2513:33:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "id": 1385,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "2371:185:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$",
+                      "typeString": "tuple(uint256,uint256,uint256,uint256)"
+                    }
+                  },
+                  "functionReturnParameters": 1372,
+                  "id": 1386,
+                  "nodeType": "Return",
+                  "src": "2364:192:5"
+                }
+              ]
+            },
+            "documentation": "@notice Get a license's info\n@param _licenseId the license id",
+            "id": 1388,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "licenseInfo",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1363,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1362,
+                  "name": "_licenseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2249:18:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1361,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2249:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2248:20:5"
+            },
+            "returnParameters": {
+              "id": 1372,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1365,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2314:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1364,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2314:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1367,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2323:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1366,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2323:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1369,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2332:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1368,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2332:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1371,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1388,
+                  "src": "2341:7:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1370,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2341:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2313:36:5"
+            },
+            "scope": 1389,
+            "src": "2228:335:5",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1390,
+        "src": "141:2425:5"
+      }
+    ],
+    "src": "0:2567:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.12+commit.7709ece9.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-26T14:46:17.644Z",
+  "devdoc": {
+    "methods": {
+      "licenseAttributes(uint256)": {
+        "params": {
+          "_licenseId": "the license id"
+        }
+      },
+      "licenseExpirationTime(uint256)": {
+        "params": {
+          "_licenseId": "the license id"
+        }
+      },
+      "licenseInfo(uint256)": {
+        "params": {
+          "_licenseId": "the license id"
+        }
+      },
+      "licenseIssuedTime(uint256)": {
+        "params": {
+          "_licenseId": "the license id"
+        }
+      },
+      "licenseProductId(uint256)": {
+        "params": {
+          "_licenseId": "the license id"
+        }
+      }
+    },
+    "title": "LicenseBase"
+  },
+  "userdoc": {
+    "methods": {
+      "licenseAttributes(uint256)": {
+        "notice": "Get a license's attributes"
+      },
+      "licenseExpirationTime(uint256)": {
+        "notice": "Get a license's issueTime"
+      },
+      "licenseInfo(uint256)": {
+        "notice": "Get a license's info"
+      },
+      "licenseIssuedTime(uint256)": {
+        "notice": "Get a license's issueTime"
+      },
+      "licenseProductId(uint256)": {
+        "notice": "Get a license's productId"
+      }
+    },
+    "notice": "This contract defines the License data structure and how to read from it"
+  }
+}

@@ -86,9 +86,12 @@ contract('MarketCore',  function (accounts) {
                     fromBlock:0,
                     toBlock:'latest'
                 })
-                console.log(history)
-                
+                console.log(history) 
             }) 
+
+            it("should set the price of an application", async () => {
+                
+            })
             
         }) 
 
