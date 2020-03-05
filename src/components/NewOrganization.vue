@@ -29,7 +29,7 @@ export default {
     };
   },
   beforeCreate: function () {
-      Users.init()
+      
     },
   methods: {
     async onSubmit(evt) {

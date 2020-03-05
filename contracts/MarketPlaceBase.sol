@@ -33,13 +33,14 @@ contract MarketplaceBase is LicenseOwnership {
     // interval specifies the duration of the subscription
     event SaleCreated(address productId, uint256 price);
 
-    function setPrice(address _productId, uint256 _price) external {
+    function _setPrice(address _productId, uint256 _price) internal {
         productIdToSale[_productId].price = _price;
         // PriceChanged();
     }
 
     function createSale(address _productId, uint256 _price) external {
-        productIdToSale[_productId].price = _price;
+        // productIdToSale[_productId].price = _price;
+        _setPrice(_productId, _price); 
         // productIdToSale[_productId].interval = _interval;
         emit SaleCreated(_productId, _price);
     }
@@ -82,6 +83,27 @@ contract MarketplaceBase is LicenseOwnership {
         return newLicenseId;
     }
 
+    function _performRating(
+        uint256 tokenId,
+        uint256 rating, 
+        bytes calldata description
+    ) internal {
+         Review memory review = Review({
+            productId: licenses[tokenId].productId,
+            rating: rating,
+            description: description
+        });
+
+        reviews.push(review);
+
+        emit ProductRated(
+            review.productId,
+            review.rating,
+            review.description,
+            block.timestamp
+        );
+    }
+
     function _mint(address _to, uint256 _tokenId) internal {
         require(_to != address(0));
         //Transfers ownership per ERC721 draft
@@ -110,21 +132,7 @@ contract MarketplaceBase is LicenseOwnership {
         bytes calldata description
     ) external {
         require(msg.sender == ownerOf(tokenId));
-
-        Review memory review = Review({
-            productId: licenses[tokenId].productId,
-            rating: rating,
-            description: description
-        });
-
-        reviews.push(review);
-
-        emit ProductRated(
-            review.productId,
-            review.rating,
-            review.description,
-            block.timestamp
-        );
+        _performRating(tokenId, rating, description); 
     }
 
     function getReviewIndexOfProduct(address productId)

@@ -14,14 +14,33 @@ import 'babel-polyfill'
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
+window.ethereum.on('accountsChanged', function (accounts) {
+  console.log(accounts)
+  if(accounts.length != 0){
+    store.dispatch('fetchUser', accounts); 
+    router.push('/'); 
+  } else { 
+    store.dispatch('resetState'); 
+    router.push('/');
+  }
 })
+
+window.addEventListener('load', (ev) => {
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
+  })
+})
+
+
+
+
+
+
+
 
 
 

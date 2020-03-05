@@ -21,13 +21,8 @@ const actions = {
         await Users.create(username);
         store.dispatch('getProfile', Users);
     },
-    async fetchUser ({commit}, address) {
-        console.log(address) 
-
-        if (address.length != 0) {
-            commit('setProfile', {name: 'MyProfile', id: address}); 
-        }
-        /* await Users.init()
+    async fetchUser ({commit}) {
+        await Users.init()
         let exists = await Users.exists(Users.account)
         try {
             if (exists) {
@@ -37,7 +32,7 @@ const actions = {
             }
         } catch (e) {
             console.log(e);
-        } */
+        }
     },
     async destroyUser ({commit}) {
         await Users.init();
@@ -59,13 +54,11 @@ const actions = {
      * -----------Organization---------------
      * 
      */
-    
-   /*  async getOrganization ({commit}) {
+    async getOrganization ({commit}) {
         await Organizations.init();
         let numberOfOrganizations = await Organizations.getOrganizationsOfUser();
         console.log(numberOfOrganizations);
-    }, */
-
+    },
     async createOrganization({commit}, payload) {
         // fetch user Object from IFPS  
         // append Organization IFPS Hash to the User Object 

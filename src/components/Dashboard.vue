@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
-    <h1>{{ msg }}</h1>
-    <div v-if="$store.state.user.isLoggedIn">
+    <h1>{{ msg }} </h1>
+   <!--  <div v-if="$store.state.user.isLoggedIn">
       Welcome {{$store.state.user.name}}. Destroy your account by clicking
       <a
         href="#"
@@ -14,7 +14,7 @@
     <div v-else>
       Sign up
       <router-link to="/register">here</router-link>.
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     };
   },
   beforeCreate: async function() {
-    this.$store.dispatch('getOrganization');
+   //  this.$store.dispatch('getOrganization');
     // fetch UserProfile 
     // fetch Organizations 
     // fetch Apis 

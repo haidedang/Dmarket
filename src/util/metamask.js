@@ -2,7 +2,7 @@
 import Web3 from 'web3' 
 
 class MetaMask {
-     static getWeb3() {
+     static async getWeb3() {
         return new Promise(function(resolve, reject) {
             if(window.ethereum) {
                 window.web3 = new Web3(ethereum); 
@@ -12,6 +12,7 @@ class MetaMask {
                     // User denied access 
                 }
             }
+            resolve(web3)
         })
        
     }

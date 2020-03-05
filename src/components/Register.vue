@@ -20,7 +20,8 @@
 
 <script>
 
-import userService from '@/services/userService';
+/* import userService from '@/services/userService';
+ */
 import EthereumClient from '@/js/EthereumClient';
 /* import getWeb3 from '@/util/getWeb3'
  */
