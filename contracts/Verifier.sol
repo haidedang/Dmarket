@@ -25,17 +25,21 @@ contract Verifier {
         salt
     ));
     
-    struct App {
+    struct Entity {
+        address entityId; 
         address author;
-        string appName;
+        string name;
         string description;
-        string downloadLink;
-        address[] supportedApp;
     }
-    
-    struct Identity {
-        uint256 userId;
-        address wallet;
+
+    struct EntityVersion {
+        address versionId;
+        string  entityId;
+        address author;
+        string name; 
+        string releaseNote;
+        string downloadLink;
+        address[] supportedEntity; 
     }
     
     struct Bid {
