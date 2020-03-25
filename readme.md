@@ -1,6 +1,6 @@
 # Dmarket
 
-The goal of this project is to create a decentralized marketplace where users can buy and sell their cars. Each car has its digital identity on the blockchain which cannot be modified. This should create trust between seller and buyer even if they do not know each other.
+The goal of this project is to create a decentralized marketplace where users can buy and sell their apps.
 
 ## Getting Started
 
@@ -50,7 +50,6 @@ npm run bs
 Run local blockchain
 
 ```
-cd ethereum
 truffle develop
 ```
 
@@ -81,9 +80,6 @@ cd test/truffle
 truffle test fileName.js 
 ```
 
-## Deployment
-
-TODO: Deployment on mainnet
 
 ## Built With
 
@@ -92,75 +88,8 @@ TODO: Deployment on mainnet
 * [OpenZeppelin](https://openzeppelin.org/)
 * [NodeJS](https://nodejs.org/en/)
 * [ExpressJS](http://expressjs.com/de/)
-* [ReactJS](https://reactjs.org)
+* [VueJS](https://reactjs.org)
 * [Webpack](https://webpack.js.org)
 * [MongoDB](https://www.mongodb.com)
 
-### Boilerplate
 
-* [mern-starter](https://github.com/Hashnode/mern-starter)
-
-## Learning Resources
-
-* [React Intro](https://reactjs.org/tutorial/tutorial.html)
-* [Redux (actions, reducers, store)](https://redux.js.org)
-
-## Project Structure (Abstract)
-
-```
-├── client
-│   ├── modules (groups of related components)
-│   │   ├── App
-│   │   ├── Car (cards, detail, ...)
-│   │   └── Offer (page, detail, ...)
-│   ├── util
-│   ├── App.js (root component)
-│   ├── index.js (injects root component into page)
-│   ├── main.css
-│   ├── reducers.js (root reducer)
-│   ├── routes.js
-│   └── store.js (state of app)
-|
-├── ethereum
-|
-├── dist (producton build for deployment)
-|
-├── Intl (text for client)
-|
-├── server
-│   ├── controllers (communication with blockchain)
-│   │   ├── trade.controller.js
-│   │   └── car.controller.js
-│   ├── models
-│   │   ├── car.js
-│   │   └── offer.js
-│   ├── routes
-│   │   ├── trade.routes.js (buy, sell, ...)
-│   │   ├── car.routes.js (find, details, ...)
-│   ├── util
-│   ├── config.js
-│   └── server.js (setup, db connection, startup, ...)
-|
-├── node_modules
-├── README.md
-├── package.json
-└── .gitignore
-```
-
-## Troubleshooting
-No changes after migration
-* `truffle migrate --reset` to run all migrations from beginning
-
-Contract migration failed
-* remove `/build` folder and perform migration again
-
-### Error messages
-	Error: the tx doesn't have the correct nonce. account has nonce of: 4 tx has nonce of: 16
-Solution: [Reset account](https://stackoverflow.com/questions/45585735/testrpc-ganache-the-tx-doesnt-have-the-correct-nonce)
-
-## Authors
-
-* **Robin Papke**
-* **Lucas Rebscher**
-* **Chinh Tran**
-* **Hai Dang**
