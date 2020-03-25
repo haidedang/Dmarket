@@ -1,0 +1,155 @@
+\chapter{Related Work}
+\label{cha:relatedwork}
+
+The state of the art goes here...
+
+\section{Blockchain}
+This section describes the fundamental concepts of blockchain technology. First, cryptographic concepts such as hash functions and public-key cryptography will be explained. After this, an overview of different blockchain implementations as well as their properties is given. 
+
+\subsection{Definition}
+The term blockchain still has no satisfying definition yet, but the ISO/TC 307 describes a blockchain as the following:
+[Blockchain is] \textit{a shared, immutable ledger that can record transactions across different industries, [...]  It is a digital platform, that records and verifies transactions in a transparent and secure way, removing the need for middlemen and increasing trust through its highly transparent nature}.
+\\
+\\
+In practice, this means that a blockchain is a distributed computer architecture where each computer is treated as a node of this network. Each node has knowledge of all transactions inside the network. Transactions are encrypted and bundled in a so called 'block'. Only one block at a time can be added to the network, because it has to be verified that it follows the previous blocks first. Nowadays, blockchain technologies have the following traits:
+\begin{itemize}
+\item \textbf{Distributed}: Each node is considered equal and has the full history of all transactions.
+Because this ledger isn't stored in a central location, blockchains avoid situations like 'single point of failure', which can be inherent in client-server based system.
+\item \textbf{Time-Stamped}: Each block contains a timestamp, along with a cryptographic hash of the previous block and transaction data. Consequently, with each new block it becomes harder to change past entries, because they are built on the information of past blocks.
+\item \textbf{Consensus}: Once the block is recorded, a consensus algorithm ensures that the data in any given block cannot retroactively be altered without changing the data of all subsequent blocks. To achieve this, it would require at least 51 percent control of the whole network. This guarantees that a value can only be spent once~\cite{Blockchain}.
+\end{itemize}
+
+Due to these traits, blockchain technology makes a suitable fit for storing  medical records, identity management and financial transaction processing~\cite{Application}.
+
+There are two types of blockchains: private and public. The best known public blockchain is the Bitcoin Network, in which everyone is allowed to read and write data to the ledger.
+An advantage of such a blockchain type is, that no access control is needed and therefore applications can be built on top of it without the approval of others.
+A private blockchain needs a participant to have the appropriate permission, in order to join the network. In contrast to the public blockchains, they do not rely on anonymous nodes to validate transactions, as the validators are vetted by the network owner~\cite{Private}.
+
+\subsection{Cryptography}
+Blockchain core processes are based on cryptographic algorithm such as symmetric and asymmetric encryption mechanism in order sign transactions and chain blocks. 
+Generally, the field of cryptography relates to mathematical techniques, which goal is to ensure information security. The most prevalent in todays distributed ledgers and cryptocurrencies include public key cryptography, cryptographic hash functions and digital signatures. 
+
+\textbf{Public key cryptography}
+
+Asymmetric encryption or public- key cryptography has been developed by Helllmann and Merkle to ensure a secure exchange of messages through an unreliable and unsafe information canal. To achieve that, the message is signed by the public key and generates a digital signature, which is unique to the owner of that private key. By encrypting the message by the public key of its recipient, only the owner of the public key can encrypt this message through his private key. public and private key are uniquely linked and attached to each other, so that the public key can be shared with others while the private key is held privately to sign transactions and decrypt messages. This is made possible by hash functions. 
+
+\textbf{Hash functions}
+Hash functions are mathematical functions to ensure data integrity and authenticity. They map a bit string of arbitrary size to a fixed size bit string and therefore making it easier to compute. The output of a hash function is called a hash value. It serves as a unique footprint of data or message. 
+
+\section{Decentralized Identity}
+
+\subsection{Self-souvereign Identity}
+/% Master thesis Martin Schaeffner 
+Identity management has always been a difficult topic in the online realm. While in centralized platforms, the platform operators have control over the data, the trend is going towards self-sovereign identity. It relies on decentralization, where no single central authority has control over the users data, but the users themselves. People, organizations and companies gain autonomy over their identity represented through so called decentralized identifiers, which enables its owner to share only the neccessary information needed by the third-party (minimal disclosure) or selectively (selective disclosure). Identities build trust through reputation. This reputation is gained by getting trusted claims from other trusted issuers. This concept also is called web of Trust. 
+
+Already existing concepts, formats, and technologies are being used together in order to create new standards for online identity management. Blockchain technology is being used as the decentralized safe public key infrastructure, in which cryptographic keys represent identities and are used to sign and authenticate messages. New standards, such as already mentioned Decentralized identifiers (DID) shall serve as the backbone of the entire SSI ecosystems. A DID, which represents a decentralized JSON Document and holds identity related attributes and is controlled by the owner of the identifier. This DID is linked to the public and private key pair and lets the owner sign transactions and messages. Claims and credentials can therefore be issued and authenticated by using that key pair. 
+Credential Holders can now present those verifiable claims to third-parties without disclosing unnecessary data. The Third party can decide themselves, wether to trust that claim or not, depending on their trust in the issuer. 
+
+\subsubsection{Decentralized Identifiers}
+The DID specification was published by the W3C Credentials Community Group under the W3C Community Final Specifation Agreement. 
+It yet has to reach an official standard status, but offers great way to design systems and processes around it. 
+Decentralized Identifiers are globally unique, unchangeable and are generated by DLT, allowing full ownership of identity by its owner. 
+A DID can represent anything from a person, organization, to a machine or a digital document.  
+The following figure shows the syntax of a DID: 
+
+{figure }
+
+The first part represents the Schema as a uniform ressource name. This part is followed by a namespace in the form of a uuid and the namespace-specific identifier. 
+
+Depending on the type of ledger, these DID will look differently. Uport e.g. uses this DID: 
+
+{figure }
+
+As an analogy, this DID acts like an URL in order to request data. The DID itself just represents the identifier and is linked to its value. The value is the DID Document, which holds authentication keys, service endpoints and other data in order to support interaction with other identity owners. 
+
+The generation of DID Documents is called DID Resolution. Depending on the underlying blockchain or distributed ledger technology, this process unfolds differently for each. 
+
+\subsubsection{DID Method}
+The DID method specifies how decentralized Identifier are created, updated, read and deleted within their underlying DLT. According to \textbf{source} , it has to specify the following points:
+
+
+\begin{itemize}
+    \item the DID method name 
+    \item the method-specific identifier structure
+    \item the generation of a method- specific identifier
+    \item the already mentioned CRUD operations on a DID and its respective DID document 
+\end{itemize}
+
+The W3C keeps an updated list of officially registered DID Methods, which fulfill the requirements of a DID method specification. 
+Taking the uport project as an example, creating a did is as simply as generating a public private Key pair in accordance to the Ethereum Ledger. Since every address is a part of the public key and every key is unique, a DID has successfully been created. 
+Attributes are recorded on the blockchain as events and can be therefore queried. 
+As more and more blockchains are appearing on the market, and identifiers are bound to their underlying blockchain technology, DID methods offer the possibility to use the identifiers interoperable across different systems within the SSI ecosystem.
+
+\subsubsection{DID Resolution}
+In order to resolve the DID Document globally, the DID Document is being resolved through an implemented DID method. In fact, there are different ways to fetch the DID Document. Because DID attributes are recorded on the blockchain, the resolver is needed to dynamically create the DID Document. Attributes are just being attached to the decentralized identifier which in fact is the public key in the form of transaction data. The resolver now fetches those transactions and decodes neccessary information and assembles the DID document in accordance to the DID specification. 
+
+\subsection{Web of Trust}
+
+Web of Trust is a Concept on how to assess trustworthiness of participants within a network, a system. It is one of two ways to assess trustworthiness in PKI systems. In contrast to having a central authority signing and therefore assigning trust to other nodes in web of Trust the nodes are verifying and signing trust themselves. 
+A trusted node has 2 properties. Validity and Trust. Validity refers that another trusted node has signed its public key. That means , that the public key really belongs to that real-world identity. Trust and Validity is on a ordinal scale with a range - full and marginal. If it is fully trusted, the node has the right to assess other nodes, or better it can validify other nodes. If it is only marginally trusted, it can only assign marginal validity. This makes sense since its ability to verify others isnt fully put faith into. The node with marginal validity need 3 other marginal trusted nodes in order to get full validity. 
+
+
+Especially with public key infrastructure where identities are represented through a computer key and disattached from real-world identity. Blockchain Technology enables for decentralized registry services and therefore allowing the owner of their keys full ownership over their identity. 
+How does it all connect? 
+Identity Management on blockchain based applications are using decentralized Identity already. 
+Because the blockchain by itself uses a decentralized key infrastructure. 
+
+\section{Decentralized Marketplaces}
+The goal of this section is to present academic literature that relates to the development of decentralized services marketplaces. 
+
+Klems et al. offer a promising design of a blockchain-enabled IT service marketplace using smart contracts to enable trustless intermediation between service providers and service consumers. In their implemented prototype, the tasks of centralized service providers such as registry services, transaction settlement and service delivery are realized with different smart contracts.
+A service registry contract holds all registered services and their respective owners and service description documents, allowing the service consumer to browse through available services. Transaction settlement is realized through a service contract, which is deployed for each service containing relevant business logic for different payment models and refunds of the service. 
+Additionally, the contract contains logic providing different options for dispute prevention and Resolution in case of service unavailability. Using an escrow mechanism requires the service provider to leave a deposit before offering a service, making sure that users will be compensated by a share of that deposit in case of multiple negative user reports. 
+Another approach describes the monitoring of quality service by logging the results to a separate monitoring contract, which notifies the service contract in case of violations, thus triggering the implemented refund mechanism. 
+Since data storage on Ethereum is quite expensive, Klems et. al. used IPFS for storing service meta data. 
+
+This thesis differs from the publication, as the research aims to improve trust mechanisms by the application of the new Trust Identity Standard W3C and examining its usefulness/ applicability in the context of such a decentralized marketplace.  
+
+
+Another decentralized marketplace called OpenBazaar is already running successfully with a continuously growing user base, ensuring the stability of the network. 
+In the OpenBazaar network, an actor can take on one of these three roles:  merchant,buyer or arbiter. In contrast to the usage of smart contracts like Klems et al. , OpenBazaar uses the concept of Ricardian contracts to carry out the trade. 
+Ricardian contracts represent contracts, which are both human - and machine-readable but are not fully automatized like smart contracts. They specify information about the merchants selling object and are then signed by the merchant's ECDSA key to verify its authenticity. 
+
+In order to prevent sybil attacks, which is a fundamental problem reputation systems are tackling with, Open Bazaar proposes
+the implementation of costs of identity. 
+In order to leave a review, an identity must be created first. This creation come with a cost through proof of work. 
+But the proof of work is done after 30 seconds, so in order to leave a review , the action has to be bought either through the following methods: 
+\begin{itemize}
+    \item \textbf {Proof of Burn}
+    Bitcoin transaction is being transmitted to an address, where the private key is unknown. The amount becomes unspendable.
+    \item \textbf {Security Deposit}
+    A trusted third - party, validated by the community, acts as an escrow. They buyer deposits his funds there, and when it becomes clear, that the product is a fraud with fake reviews, the fund gets back to the buyers pockets. 
+    
+\end{itemize}
+
+While not being able to prevent Sybil attacks to 100 percent, an attack will have to be economically analyzed by an malicious attacker. 
+If the costs are higher than the value he gets out by selling them, he might not even attempt a sybil attack. 
+
+However, in order to increase the quality of reputation , additional methods are being presented with varying Reliability. 
+
+\textbf{Low Trust Level}
+All Transaction summaries are being considered including those, which has no GUID of the buyer but only a Bitcoin address attached to them. Basically, there is no cost of identity, and a vendor could just have multiple wallets leaving fake reviews. 
+
+\textbf{Middle Trust Level}
+Only Transaction summaries with disclosed GUIDs are being considered. That means only buyers with their GUID and their known Bitcoin addresses will be considered. Coin analysis can be performed, through Bitcoins transaction graph. 
+The vendor could send the fake identity money, and this money could be used in an endless cycle to create n-times fake reviews. 
+By analyzing the transaction graph this would be become visible. 
+
+\textbf{High trust Level}
+Suppose I want to buy a product from vendor B. 
+This vendor has a history of transaction summaries. 
+Now for calculation of Reputation Score, only those will be considered, which had been transmitted by Users, who are with my network of trusted nodes. (Friends of my Friends of my direct Friends.) This is a partial topological web of my trusted identities. 
+All reviews from people who are outside my web, will not be taken into account. 
+Limitation: If I have a small web, I will not have enough score to assess the product.  
+
+
+
+
+
+
+
+
+
+
+
+

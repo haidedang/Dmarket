@@ -1,0 +1,93 @@
+\chapter{Introduction}
+\label{cha:introduction}
+
+\section{Motivation}
+
+%In 2018, the world's largest online social network platform got attacked and personal information of nearly 50 million users got exposed. \cite{isaacFacebookSecurityBreach2018} This incident makes clear how dependent users are from their platform operators.
+
+% Decentralized Platform Solution such as Open Bazaar provide the possibility of anonymous exchange and trustless intermediation of goods. 
+
+    % Why is my work important? What is the context exactly? 
+    %   There is an observable rise in Bitcoin again.
+    %    As the day of now, Bitcoin's price is chasing towards the 8000Euro Mark. The underlying technology Blockchain is still in its infancy, but according to this stat there are 2100 ICOs currently and the trend goes upwards. Blockchain makes us think differently about centralized infrastructure 
+    % # What are problems of centralized Platforms, When are they good ? 
+
+When Tim Berners-Lee invented the world wide web, his vision was to build a decentralized system of information repositories where users could create and access web content. However, creation of web content required a lot of technical knowledge and also the neccessary hardware infrastructure. But with the falling prices of personal computer and the rise of web 2.0 beginning in the early 2000s, social media platforms like Facebook, Youtube or Twitter enabled bidirectional exchange of user content \cite{oreillyWhatWebDesign2007}. 
+While these centralized platforms manage user data efficiently and allow for ease of use, it simultaneously puts the users at the mercy of the platform operators. Since they handle all the infrastructure and workings of the platform, trust in to those who are at power is needed. In 2018, the world's largest online social network platform Facebook was attacked and personal information of nearly 50 million users got exposed \cite{isaacFacebookSecurityBreach2018}. In another scandal, the company abused the trust of its users and improperly shared information of 87 million people with a political consultancy firm \cite{FacebookBrokeCanadaa}. This incident shows, that private data which is entrusted to those platforms isn't always safe and user information is dealt with without the agreement of the users. Furthermore, certain centralized platforms are so big that they lead to deficiencies in the form of lock-in effects and market barriers. \cite{einavPeerToPeerMarkets2016}
+    %(https://www.bbc.com/news/world-us-canada-48057433?intlink_from_url=https://www.bbc.com/news/topics/c81zyn0888lt/facebook-cambridge-analytica-scandal&link_location=live-reporting-story)
+    %. A peer-to-peer (P2P) structure can provide scalability and distribute the utiliza- tion of computing resources. In combination with public key cryptography, it allows users to sign messages and store private data securely, providing privacy without relying on trusted infrastructure.
+    
+    %In contrast, trust and control over data is being distributed equally among the participants in a decentralized information system, thus establishing a self-governing community. 
+
+In contrast, decentralized information systems offer a promising alternative, as they establish participants in the network as equal peers, thus forming a self-governing community.
+In such a peer-to-peer (P2P) structure every peer has equal rights and every peer can provide services as well as use other services. In combination with Web of Trust, which is a decentralized public key infrastructure and a mechanism of assessing the trustworthiness of nodes within a network, it allows for a secure exchange of data between peers \cite{durandDecentralizedWebTrust2017}. But when speaking of decentralization, according to Vitalik Buterin \cite{buterinMeaningDecentralization2017} the degree of decentralization of a system is measured by its architectural decentralization (how many computers does a system consist of?), political decentralization (how many individuals or organizations have control over the system?) and logical decentralization (does a common consensus about the data structures and interfaces of the system exist? ). While traditional peer-to-peer networks, like for example BitTorrent, are considered "decentralized" in all three mentioned characteristics and are great for storing and streaming decentralized data, there is a major security issue that comes along using this system: the need of trusting another anonymous node on providing valid data. However in 2008, Satoshi Nakamoto \cite{nakamotoBitcoinPeertoPeerElectronic} created Bitcoin, an approach for a peer-to-peer electronic cash system using a public transaction ledger, also called blockchain. The blockchain's innovation, in comparison to traditional peer-to-peer networks, is its introduction of a type of centralized transaction log (by decentralized consensus) and therefore providing logical centralization while preserving architectural and political decentralization of the system. Such a decentralized database provides the foundation for secure transactions between two parties without requiring any trust. As a result, blockchain technology has sparked great interest as it could potentially improve the current state of data privacy in our society. Other popular blockchain technologies such as Ethereum \cite{woodETHEREUMSECUREDECENTRALISED} are already working on advancing this idea and enable developers to leverage blockchain technology in both new as well as existing applications through the implementation of Smart Contracts. In short, Smart Contracts are executable programs, which are stored on the distributed ledger containing
+formalized contractual terms to perform agreements of a relationship \cite{NickSzaboSmart}. Blockchain based applications like for example Tawki allow for censorship free communication while their users remain in full control of their data without the need of a central instance \cite{westerkampTawkiSelfSovereignSocial2019}. 
+
+In a decentralized environment, each node in the network is hosting a running instance of the decentralized application or service implementation on its local machine. However, there must exist a standardized way, in which other peers can be identified and located. While the traditional client- server model handles such a lookup through requesting a DNS Server, which resolves URLs to their respective IP addresses, how do peers in a decentralized network know to which address they should send a message to, if there is no central lookup point such as a central DNS Server? Without a DNS Server, those instances would need to know the IP addresses to which they wanted to send a message. In Ethereum for example, such a mapping service is being implemented by a Smart Contract and similar to the DNS, the Ethereum Name Service resolves a registered node name (Ethereum Domain Name) to a specified Ethereum Address \cite{Introduction}. % Quelle  %Has to be specified in Detail, not clear yet 
+This mapping service has been used in our implementation of Tawki \cite{westerkampTawkiSelfSovereignSocial2019}. In a decentralized user registry, the respective network locations were mapped to their Ethereum domain names and could be therefore looked up by other users. However, while transactional trust is being achieved computationally through tamper- proof distributed ledger technology (DLT), trust in identity remains a challenge to be solved. Since everyone can register random Ethereum domain names, one needs to be sure that the person is really the person he/she claims to be. Open source projects like Uport tackle those problems and aim at making Ethereum identities conform to the official Decentralized Identity specification \cite{UPort}.
+Decentralized Identity (DID) refers to a concept, in which a digital identity is being owned by its owner through a decentralized resource record, which is basically just a JSON document containing information about the digital identity. It is universally discoverable and stored on a tamper-proof distributed ledger. This document can only be edited by its owner through his/her private key and can be accessed through a specified DID URL which specifies the location of this resource. What is truly innovative about this concept, is that users will be able to attach so called verifiable claims to their DID document and can use their DID to verify their real-world identity \cite{DecentralizedIdentifiersDIDs}. 
+However, suppose that Tawki specifies an open protocol and the data formats to be used. Different service applications which implement this protocol could now communicate with each other. But this service application would just stand by itself. Users could just communicate with service applications implementing the "Tawki protocol". Now Blade, another project of SNET, wants to introduce a decentralized architecture to make the whole infrastructure reusable. The mapping service shouldn't only be able to locate other Tawki users but also offer additional methods, which enable the lookup of other available service protocols on this specific node. Each node thus has a Blade instance implemented, which provides an interface for returning a list of available service protocols which they are implementing. Other nodes can retrieve this list of available  service protocols through their Blade interface and then would be able to install service applications which use this protocol in order to communicate with the user. The big question is where to get these service applications from? A service registry would be the perfect solution. However, a centralized one would have the problems which were introduced in the previous section.
+
+
+//
+A marketplace would be the perfect solution.  Hence, a decentralized marketplace is needed which is governed by the whole community in terms of authorizing service application releases and validating service instances. Approaching this problem with the Blockchain technology as it provides tamper proof consensus mechanisms seems to be a promising solution.  
+    
+ 
+\section{Problem Statement}
+
+% General challenges regarding centralized platforms. 
+
+
+
+\subsection{Challenges}
+In the following section, the challenges in regard to decentralized service registries and decentralized marketplaces will be identified through literature review. 
+
+\subsection{What are identified challenges of decentralized application marketplaces?}
+
+
+
+\section{Research Questions}
+
+Due to its decentralized infrastructure, there are some interesting problems and challenges which need to be addressed: 
+\begin{itemize}
+    \item \textbf{How can apps and their respective compatible APIs be managed in a decentralized marketplace? } \newline 
+    Apps and APIs should be editable by their respective owners and while there are independent developers who work on their own, there are also companies with multiple developers working on the source files. Now suppose that it is the case that a developer leaves a company but still has permissioned access to the source code due to immutability of the directory  -  how should one manage this access control with multiple developers in a decentralized directory? 
+    \item \textbf{How can identity be managed in a way, that users are able to interact in a self-sovereign manner?}\newline 
+    Since users can just register themselves, how can one ensure that the identity of for example Bob is really the identity of Bob? 
+    This is fundamental in order to verify the origin of an offered application and create trust among peers or users of that marketplace. The applicability of Decentralized Identifiers as a potential solution will be examined more closely. 
+    \item \textbf{How can trust and quality of content be achieved in such a decentralized  marketplace ? } 
+    \newline 
+    A central marketplace for applications such as Google Playstore has certain guidelines implemented which developers have to follow to ensure the trustworthiness and quality of the offered applications. Since this central authority is being erased, the community has to handle this on their own. Every user could upload scam applications and malicious services or launch sybil attacks. 
+    How can this be prevented? 
+    %\item \textbf{ Optional: How can licensemanagement be realized in a decentralized marketplace? } Software licensing could be supported by the usage of a custom token. 
+\end{itemize}
+
+
+\section{Research Contributions}
+ 
+Design Science Research seeks to produce new knowledge in a selected application domain through generating IT artifacts, which can be models, theories or instantiations. This work will follow this paradigm and develop a blockchain-based, prototypical application in order to examine the research questions. 
+
+The IT artifacts will be the following components: 
+\begin{itemize}
+    \item \textbf{Web-based GUI.} \newline \newline 
+    The GUI should allow users to: 
+    \begin{itemize}
+        \item {create and register an identity.}
+        \item {manage the identity.}
+        \item {register a unique name for his identity.}
+        \item  {create, register, and manage organizations, consisting of multiple developers and register a unique name for the organization.}
+        \item  {create, register, and manage APIs. Register a unique name for the API.} 
+        \item {create, register, and manage applications. Register a unique name for the application.}
+        \item{publish and unpublish new versions of owned APIs and applications.}
+        \item {browse a list of available APIs and applications. For each API (and version), a list of applications should be accessible that implement this specific API. Vice versa, for each application, the implemented APIs should be listed.}
+        \item {
+        create a list of “curated” applications and APIs, where an entity or user would “recommend” specific APIs or applications. Users should be able to browse such lists of “trusted” third parties.
+        }
+    \end{itemize}
+    \item \textbf{Decentralized data storage of applications and APIs.}  \newline
+    Applications and signed service protocols specifying the data formats to be used should be stored in a decentralized way making sure not to break the chain of decentralization. 
+    \item \textbf{Blockchain-based directory with decentralized identity authentication.} \newline
+    Users should be able to register and authenticate themselves with a decentralized identifier and manage their identity data in a self-sovereign manner. The applicability of Decentralized Identifier as a potential solution will be examined further.
+    \item \textbf{Optional: How can license acquisition be realized anonymously in a decentralized marketplace.}  \newline
+    Users should be able to acquire licenses for using a specific application. However, on-chain transactions, that means buying the licence with a blockchain-based currency, are recorded on the ledger publicly for everyone to see. How can acquisition of a license be realized without disclosing information about it to a third party?
+\end{itemize}

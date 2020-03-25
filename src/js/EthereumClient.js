@@ -83,6 +83,7 @@ class EthereumClient {
 
   // ------- ENTITY Marketplace Interface Methods ------------ 
 
+  //DEPRECEATED - not needed anymore? 
   async getAllEntities() {
      let result = await this.marketCore.getAllEntities.call();
      return result
