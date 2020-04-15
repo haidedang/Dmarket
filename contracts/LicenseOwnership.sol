@@ -44,16 +44,16 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     // Mapping from token ID to approved address
     mapping(uint256 => address) private tokenApprovals;
 
-    /// @dev Checks if a given address is the current owner of a particular Car.
+    /// @dev Checks if a given address is the current owner of a particular license.
   /// @param _claimant the address to validate.
-  /// @param _tokenId car id, must be > 0
+  /// @param _tokenId license id, must be > 0
   function _owns(address _claimant, uint256 _tokenId) internal view returns (bool) {
     return tokenOwner[_tokenId] == _claimant;
   }
 
-   /// @dev Checks if a given address currently has transferApproval for a particular Car.
+   /// @dev Checks if a given address currently has transferApproval for a particular license.
   /// @param _claimant the address to validate.
-  /// @param _tokenId car id, must be > 0
+  /// @param _tokenId license id, must be > 0
   function _approvedFor(address _claimant, uint256 _tokenId) internal view returns (bool) {
     return tokenOwner[_tokenId] == _claimant;
   }
@@ -64,16 +64,16 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     tokenOwner[_tokenId] = _approved;
   }
 
-   /// @notice Returns the number of Cars owned by a specific address.
+   /// @notice Returns the number of licenses owned by a specific address.
   /// @param _owner The owner address to check.
   /// @dev Required for ERC-721 compliance
   function balanceOf(address _owner) public view returns (uint256 count) {
     return ownershipTokenCount[_owner];
   }
 
-  /// @notice Transfers a Car to another address.
+  /// @notice Transfers a license to another address.
   /// @param _to The address of the recipient, can be an user or contract.
-  /// @param _tokenId The ID of the Car to transfer.
+  /// @param _tokenId The ID of the license to transfer.
   /// @dev Required for ERC-721 compliance.
   function transfer(
     address _to,
@@ -91,11 +91,11 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     _transfer(msg.sender, _to, _tokenId);
   }
 
-  /// @notice Grant another address the right to transfer a specific Car via
+  /// @notice Grant another address the right to transfer a specific license via
   ///  transferFrom(). This is the preferred flow for transferring NFTs to contracts.
   /// @param _to The address to be granted transfer approval. Pass address(0) to
   ///  clear all approvals.
-  /// @param _tokenId The ID of the Car that can be transferred if this call succeeds.
+  /// @param _tokenId The ID of the license that can be transferred if this call succeeds.
   /// @dev Required for ERC-721 compliance.
   function approve(
     address _to,
@@ -113,12 +113,12 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     emit Approval(msg.sender, _to, _tokenId);
   }
 
-  /// @notice Transfer a Car owned by another address, for which the calling address
+  /// @notice Transfer a license owned by another address, for which the calling address
   ///  has previously been granted transfer approval by the owner.
-  /// @param _from The address that owns the Car to be transferred.
-  /// @param _to The address that should take ownership of the Car. Can be any address,
+  /// @param _from The address that owns the license to be transferred.
+  /// @param _to The address that should take ownership of the license. Can be any address,
   ///  including the caller.
-  /// @param _tokenId The ID of the Car to be transferred.
+  /// @param _tokenId The ID of the license to be transferred.
   /// @dev Required for ERC-721 compliance.
   function transferFrom(
     address _from,
@@ -130,7 +130,7 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     // Safety check to prevent against an unexpected 0x0 default.
     require(_to != address(0));
     // Disallow transfers to this contract to prevent accidental misuse.
-    // The contract should never own any cars
+    // The contract should never own any licenses
     require(_to != address(this));
     // Check for approval and valid ownership
     require(_approvedFor(msg.sender, _tokenId));
@@ -160,8 +160,8 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     }
 
 
-  /// @notice Returns a list of all Car IDs assigned to an address.
-  /// @param _owner The owner whose Cars we are interested in.
+  /// @notice Returns a list of all license IDs assigned to an address.
+  /// @param _owner The owner whose licenses we are interested in.
   /// @dev This should not be called by contract code since it's expensive
   function tokensOfOwner(address _owner) external view returns (uint256[] memory ownerTokens) {
     uint256 tokenCount = balanceOf(_owner);
@@ -174,8 +174,8 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
       uint256 totalLicenses = totalSupply();
       uint256 resultIndex = 0;
 
-      // We count on the fact that all cars have IDs starting at 1 and increasing
-      // sequentially up to the totalCar count.
+      // We count on the fact that all licenses have IDs starting at 1 and increasing
+      // sequentially up to the totallicense count.
       uint256 licenseId;
 
       for (licenseId = 1; licenseId <= totalLicenses; licenseId++) {
@@ -189,13 +189,13 @@ contract LicenseOwnership is ERC721Extended, LicenseBase {
     }
   }
 
-/// @dev Assigns ownership of a specific car to an address.
+/// @dev Assigns ownership of a specific license to an address.
   function _transfer(address _from, address _to, uint256 _licenseId) internal {
     // update token count
     ownershipTokenCount[_to]++;
     // transfer ownership
     tokenOwner[_licenseId] = _to;
-    // When creating new cars _from is 0x0, but we can't account that address.
+    // When creating new licenses _from is 0x0, but we can't account that address.
     if (_from != address(0)) {
       ownershipTokenCount[_from]--;
       // remove transfer approval
