@@ -37,7 +37,8 @@ function getBlock(blockNumber) {
 }
 
 contract('MarketCore',  function (accounts) {
-    let account = accounts[0]
+    let account = accounts[0];
+    let buyer = accounts[1];    
     let marketCore;
     let registry; 
     let sigObj; 
@@ -90,13 +91,29 @@ contract('MarketCore',  function (accounts) {
             }) 
 
             it("should set the price of an application", async () => {
-                
+                let tx = await marketCore.createSale(entity.address, 100);
+               
+            })
+
+            it("user should be able to purchase it", async () => {
+                console.log(buyer)
+                 let licenseID =  await marketCore.purchaseService(entity.address, buyer, 22000, {from: buyer, value: '100'}); 
+                 // owner of the license is the buyer ! 
+                 assert.equal(await marketCore.ownerOf(0), buyer);  
             })
             
+            it("user should be able to rate the product", async () => {
+                let tx = await marketCore.rateProduct(0, 5, stringToBytes32("This shit is awesome!"), {from: buyer}); 
+                console.log(tx); 
+            })
         }) 
 
-         
     }) 
+
+    describe("should acquire a application license", () => {
+        let result;  
+
+    })
 
     /* describe("verifyApp()", () => {
         let sig;
