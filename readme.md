@@ -74,11 +74,59 @@ npm run test
 ```
 
 Test specific smart contracts
-
 ```
 cd test/truffle 
 truffle test fileName.js 
 ```
+
+```
+\begin{verbatim}
+├── src (Blade Frontend)
+│   ├── components (groups of related components)
+│   │   ├── Appstore
+│   │   │   ├──── Entity (component, pages, ...)
+│   │   │   ├──── Organization (components, pages, ...)
+│   ├── util
+│   ├── App.js (root component)
+│   ├── index.js (injects root component into page)
+│   ├── main.css
+│   ├── reducers.js (root redux reducer)
+│   ├── routes.js
+│   └── store.js (state of app)
+|
+├── contract (Ethereum smart contracts)
+|
+├── dist (producton build for deployment)
+|
+├── Intl (text for client)
+|
+├── server (registry server)
+│   ├── controllers (communication with blockchain)
+│   │   ├── trade.controller.js
+│   │   └── car.controller.js
+│   ├── models
+│   │   ├── Api.js 
+│   │   ├── ApiRelease.js 
+│   │   ├── App.js 
+│   │   ├── AppRelease.js    
+│   │   └── Organization.js
+│   ├── routes
+│   │   ├── app.routes.js (fetch marketplace entities ...)
+│   │   ├── car.routes.js (find, details, ...)
+│   ├── util
+│   │   ├── config.js
+│   │   ├── dMarketService.js
+│   └── server.js (setup, db connection, startup, ...)
+|
+├── node_modules
+├── README.md
+├── package.json
+└── .gitignore
+
+```
+
+
+
 
 
 ## Built With
