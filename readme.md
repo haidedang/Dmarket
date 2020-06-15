@@ -80,7 +80,6 @@ truffle test fileName.js
 ```
 
 ```
-\begin{verbatim}
 ├── src (Blade Frontend)
 │   ├── components (groups of related components)
 │   │   ├── Appstore
@@ -122,12 +121,7 @@ truffle test fileName.js
 ├── README.md
 ├── package.json
 └── .gitignore
-
 ```
-
-
-
-
 
 ## Built With
 
